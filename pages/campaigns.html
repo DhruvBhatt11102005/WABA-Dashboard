@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campaigns — WABA Dashboard</title>
+  <meta name="description" content="Manage WhatsApp broadcast campaigns"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script>window.PAGES_PREFIX = '../';</script>
+</head>
+<body>
+  <div class="app-layout" id="app-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Campaigns</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="live-clock">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span id="live-clock-time" class="live-clock-time">--:--:--</span>
+          </div>
+          <button class="header-btn" title="Notifications">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+            </svg>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="header-avatar" title="EE Admin">EE</div>
+        </div>
+      </header>
+      <main class="page-content">
+        
+        <div class="page-header animate-fadeInUp">
+          <div>
+            <h1 class="page-title">Campaigns</h1>
+            <p class="page-desc">Manage broadcast campaigns</p>
+          </div>
+          <div class="flex gap-3">
+            <button class="btn-secondary">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Import
+            </button>
+            <button class="btn-primary">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Create Campaign
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary Strip -->
+        <div class="info-bar animate-fadeInUp animate-delay-1" style="margin-bottom: 24px; justify-content: space-around;">
+          <div class="info-chip">
+            <div class="info-chip-icon blue"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <span>Total: <strong style="font-size:16px;">8</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon green"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <span>Active: <strong style="font-size:16px; color:var(--green);">2</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon amber"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <span>Scheduled: <strong style="font-size:16px; color:var(--amber);">1</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon purple"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <span>Completed: <strong style="font-size:16px; color:var(--purple-light);">5</strong></span>
+          </div>
+        </div>
+
+        <div class="card animate-fadeInUp animate-delay-2">
+          
+          <!-- Filters -->
+          <div class="flex justify-between items-center mb-6" style="flex-wrap: wrap; gap: 16px;">
+            <div class="flex gap-3">
+              <div class="search-bar" style="width:260px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" placeholder="Search campaigns..."/>
+              </div>
+              <select class="form-select" style="width:140px;">
+                <option>All Status</option>
+                <option>Active</option>
+                <option>Scheduled</option>
+                <option>Completed</option>
+              </select>
+            </div>
+            <div class="flex gap-3">
+              <input type="date" class="form-input" style="width:auto;" />
+              <button class="btn-secondary" title="Export CSV">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campaign Name</th>
+                  <th>Type</th>
+                  <th>Recipients</th>
+                  <th>Sent</th>
+                  <th>Delivered</th>
+                  <th>Read</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">Summer Sale 2026</td>
+                  <td><span class="category-chip" style="font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg-glass);border:1px solid var(--border);">Broadcast</span></td>
+                  <td>1,240</td>
+                  <td>1,240</td>
+                  <td>1,180</td>
+                  <td>892</td>
+                  <td><span class="status active">Active</span></td>
+                  <td>Jun 10, 2026</td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">Welcome Series</td>
+                  <td><span class="category-chip" style="font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg-glass);border:1px solid var(--border);">Sequence</span></td>
+                  <td>456</td>
+                  <td>456</td>
+                  <td>441</td>
+                  <td>388</td>
+                  <td><span class="status sent">Completed</span></td>
+                  <td>Jun 8, 2026</td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">Flash Offer</td>
+                  <td><span class="category-chip" style="font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg-glass);border:1px solid var(--border);">Broadcast</span></td>
+                  <td>2,100</td>
+                  <td>2,100</td>
+                  <td>1,987</td>
+                  <td>1,456</td>
+                  <td><span class="status sent">Completed</span></td>
+                  <td>Jun 5, 2026</td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">Product Launch</td>
+                  <td><span class="category-chip" style="font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg-glass);border:1px solid var(--border);">Broadcast</span></td>
+                  <td>890</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td><span class="status pending">Scheduled</span></td>
+                  <td>Jun 15, 2026</td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">Re-engagement</td>
+                  <td><span class="category-chip" style="font-size:11px;padding:2px 8px;border-radius:4px;background:var(--bg-glass);border:1px solid var(--border);">Sequence</span></td>
+                  <td>330</td>
+                  <td>180</td>
+                  <td>172</td>
+                  <td>95</td>
+                  <td><span class="status active">Active</span></td>
+                  <td>Jun 9, 2026</td>
+                  <td>
+                    <div class="flex gap-2">
+                      <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                      <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Pagination -->
+          <div class="flex justify-between items-center mt-6 pt-4" style="border-top:1px solid var(--border);">
+            <span class="text-muted" style="font-size:13px;">Showing 1 to 5 of 8 campaigns</span>
+            <div class="flex gap-2">
+              <button class="btn-secondary" style="padding:6px 12px;" disabled>Previous</button>
+              <button class="btn-secondary" style="padding:6px 12px; background:var(--green-glow); color:var(--green); border-color:var(--border-accent);">1</button>
+              <button class="btn-secondary" style="padding:6px 12px;">Next</button>
+            </div>
+          </div>
+          
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Drip Campaigns — WABA Dashboard</title>
+  <meta name="description" content="Automated message sequences"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script>window.PAGES_PREFIX = '../';</script>
+  <style>
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .layout-grid { grid-template-columns: 1fr; }
+    }
+    
+    .drip-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .drip-card:hover, .drip-card.active {
+      border-color: var(--green);
+      background: var(--bg-glass);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .drip-card.active {
+      border-left: 4px solid var(--green);
+    }
+    
+    /* Flow Visualizer */
+    .flow-container {
+      padding: 20px 10px;
+    }
+    .flow-node.green { background: var(--green-glow); color: var(--green); border: 2px solid var(--green); }
+    .flow-node.blue { background: var(--blue-glow); color: var(--blue); border: 2px solid var(--blue); }
+    .flow-node.purple { background: var(--purple-glow); color: var(--purple-light); border: 2px solid var(--purple-light); }
+    .flow-node.amber { background: var(--amber-glow); color: var(--amber); border: 2px solid var(--amber); }
+    .flow-node.teal { background: var(--teal-glow); color: var(--teal); border: 2px solid var(--teal); }
+    
+    .flow-content {
+      position: relative;
+    }
+    .flow-content::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 14px;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 8px solid var(--border);
+    }
+    .flow-content::after {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 14px;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 8px solid var(--bg-card);
+    }
+    
+    .day-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: var(--bg-glass);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout" id="app-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Drip Campaigns</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="live-clock">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span id="live-clock-time" class="live-clock-time">--:--:--</span>
+          </div>
+          <button class="header-btn" title="Notifications">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+            </svg>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="header-avatar" title="EE Admin">EE</div>
+        </div>
+      </header>
+      <main class="page-content">
+        
+        <div class="page-header animate-fadeInUp">
+          <div>
+            <h1 class="page-title">Drip Campaigns</h1>
+            <p class="page-desc">Automated message sequences</p>
+          </div>
+          <button class="btn-primary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            New Sequence
+          </button>
+        </div>
+
+        <div class="layout-grid animate-fadeInUp animate-delay-1">
+          
+          <!-- Left: List -->
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <div class="search-bar" style="width: 100%;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" placeholder="Search sequences..."/>
+              </div>
+            </div>
+
+            <div class="drip-card active">
+              <div class="flex justify-between items-start mb-2">
+                <div class="flex items-center gap-3">
+                  <h3 style="font-size:16px; font-weight:700; color:var(--text-primary);">Onboarding Flow</h3>
+                  <span class="status active">Active</span>
+                </div>
+                <div class="flex gap-2">
+                  <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 text-muted" style="font-size:13px; margin-bottom:12px;">
+                <span class="day-badge">5 steps</span>
+                <span>234 active contacts</span>
+                <span>Created Jun 1</span>
+              </div>
+              <div style="background:var(--bg-primary); border-radius:4px; height:6px; overflow:hidden;">
+                <div style="background:var(--green); height:100%; border-radius:4px; width:75%;"></div>
+              </div>
+            </div>
+
+            <div class="drip-card">
+              <div class="flex justify-between items-start mb-2">
+                <div class="flex items-center gap-3">
+                  <h3 style="font-size:16px; font-weight:700; color:var(--text-primary);">Win-back Sequence</h3>
+                  <span class="status active">Active</span>
+                </div>
+                <div class="flex gap-2">
+                  <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 text-muted" style="font-size:13px; margin-bottom:12px;">
+                <span class="day-badge">3 steps</span>
+                <span>89 contacts</span>
+                <span>Created May 28</span>
+              </div>
+              <div style="background:var(--bg-primary); border-radius:4px; height:6px; overflow:hidden;">
+                <div style="background:var(--green); height:100%; border-radius:4px; width:45%;"></div>
+              </div>
+            </div>
+
+            <div class="drip-card">
+              <div class="flex justify-between items-start mb-2">
+                <div class="flex items-center gap-3">
+                  <h3 style="font-size:16px; font-weight:700; color:var(--text-primary);">Product Education</h3>
+                  <span class="status draft">Draft</span>
+                </div>
+                <div class="flex gap-2">
+                  <button class="btn-ghost" style="padding:4px;" title="View"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                  <button class="btn-ghost" style="padding:4px;" title="Edit"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 text-muted" style="font-size:13px; margin-bottom:12px;">
+                <span class="day-badge">7 steps</span>
+                <span>45 contacts</span>
+                <span>Created Jun 5</span>
+              </div>
+              <div style="background:var(--bg-primary); border-radius:4px; height:6px; overflow:hidden;">
+                <div style="background:var(--green); height:100%; border-radius:4px; width:0%;"></div>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Right: Visualizer -->
+          <div>
+            <div class="card" style="position: sticky; top: 88px;">
+              <div class="flex justify-between items-center mb-4">
+                <h3 style="font-size:15px; font-weight:700; color:var(--text-primary);">Onboarding Flow</h3>
+                <button class="btn-ghost" style="padding:4px; color:var(--green);" title="Play/Pause">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+              </div>
+              
+              <div class="flow-container">
+                <!-- Step 1 -->
+                <div class="flow-step">
+                  <div class="flow-node green">1</div>
+                  <div class="flow-content">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="day-badge">Day 0</span>
+                      <span style="font-size:11px; color:var(--green);">Open Rate: 85%</span>
+                    </div>
+                    <div style="font-size:13.5px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Welcome Message</div>
+                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.4;">"Welcome! Thanks for joining us."</div>
+                  </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flow-step">
+                  <div class="flow-node blue">2</div>
+                  <div class="flow-content">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="day-badge">Day 1</span>
+                      <span style="font-size:11px; color:var(--green);">Open Rate: 72%</span>
+                    </div>
+                    <div style="font-size:13.5px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Introduction</div>
+                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.4;">"Here is what we offer..."</div>
+                  </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flow-step">
+                  <div class="flow-node purple">3</div>
+                  <div class="flow-content">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="day-badge">Day 3</span>
+                      <span style="font-size:11px; color:var(--green);">Open Rate: 68%</span>
+                    </div>
+                    <div style="font-size:13.5px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Value Prop</div>
+                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.4;">"Our top features include..."</div>
+                  </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flow-step">
+                  <div class="flow-node amber">4</div>
+                  <div class="flow-content">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="day-badge">Day 5</span>
+                      <span style="font-size:11px; color:var(--green);">Open Rate: 54%</span>
+                    </div>
+                    <div style="font-size:13.5px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">CTA</div>
+                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.4;">"Ready to get started? Click here!"</div>
+                  </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="flow-step" style="margin-bottom: 0;">
+                  <div class="flow-node teal">5</div>
+                  <div class="flow-content" style="margin-bottom: 0;">
+                    <div class="flex justify-between items-center mb-2">
+                      <span class="day-badge">Day 7</span>
+                      <span style="font-size:11px; color:var(--text-muted);">Open Rate: --</span>
+                    </div>
+                    <div style="font-size:13.5px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Follow-up</div>
+                    <div style="font-size:12px; color:var(--text-secondary); line-height:1.4;">"How are you finding our service?"</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/sidebar.js"></script>
+</body>
+</html>

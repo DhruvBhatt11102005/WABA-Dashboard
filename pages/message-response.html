@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Response — WABA Dashboard</title>
+  <meta name="description" content="Incoming replies & response tracking"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script>window.PAGES_PREFIX = '../';</script>
+</head>
+<body>
+  <div class="app-layout" id="app-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Message Response</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="live-clock">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span id="live-clock-time" class="live-clock-time">--:--:--</span>
+          </div>
+          <button class="header-btn" title="Notifications">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+            </svg>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="header-avatar" title="EE Admin">EE</div>
+        </div>
+      </header>
+      <main class="page-content">
+        
+        <div class="page-header animate-fadeInUp">
+          <div>
+            <h1 class="page-title">Message Response</h1>
+            <p class="page-desc">Incoming replies &amp; response tracking</p>
+          </div>
+          <button class="btn-secondary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+        </div>
+
+        <div class="info-bar animate-fadeInUp animate-delay-1" style="margin-bottom: 24px; justify-content: space-around;">
+          <div class="info-chip">
+            <div class="info-chip-icon blue"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <span>Total: <strong style="font-size:16px;">1,234</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon green"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg></div>
+            <span>Positive: <strong style="font-size:16px; color:var(--green);">892</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon amber"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+            <span>Neutral: <strong style="font-size:16px; color:var(--amber);">245</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon" style="background:rgba(239,68,68,0.1); color:#ef4444;"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 15v4a3 3 0 003 3l4-9V2H5.72a2 2 0 00-2 1.7l-1.38 9a2 2 0 002 2.3zm7-13h2.67A2.31 2.31 0 0122 4v7a2.31 2.31 0 01-2.33 2H17"/></svg></div>
+            <span>Negative: <strong style="font-size:16px; color:#ef4444;">97</strong></span>
+          </div>
+        </div>
+
+        <div class="card animate-fadeInUp animate-delay-2">
+          
+          <div class="flex justify-between items-center mb-6" style="flex-wrap: wrap; gap: 16px;">
+            <div class="flex gap-3">
+              <div class="search-bar" style="width:260px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Search replies..."/>
+              </div>
+              <select class="form-select" style="width:160px;">
+                <option>All Campaigns</option>
+                <option>Summer Sale</option>
+                <option>Flash Offer</option>
+                <option>Welcome Series</option>
+              </select>
+            </div>
+            <div class="flex gap-3">
+              <input type="date" class="form-input" style="width:auto;" />
+              <select class="form-select" style="width:140px;">
+                <option>All Sentiments</option>
+                <option>Positive</option>
+                <option>Neutral</option>
+                <option>Negative</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Contact</th>
+                  <th>Message Preview</th>
+                  <th>Campaign</th>
+                  <th>Sentiment</th>
+                  <th>Received At</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 98765 43210</td>
+                  <td>"Yes please send more details!"</td>
+                  <td>Summer Sale</td>
+                  <td><span class="status active">Positive</span></td>
+                  <td>Today 10:24 AM</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 87654 32109</td>
+                  <td>"Not interested"</td>
+                  <td>Flash Offer</td>
+                  <td><span class="status failed">Negative</span></td>
+                  <td>Today 9:15 AM</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 76543 21098</td>
+                  <td>"What is the price?"</td>
+                  <td>Welcome Series</td>
+                  <td><span class="status pending">Neutral</span></td>
+                  <td>Today 8:30 AM</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 65432 10987</td>
+                  <td>"Order received, thank you!"</td>
+                  <td>Onboarding</td>
+                  <td><span class="status active">Positive</span></td>
+                  <td>Yesterday</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 54321 09876</td>
+                  <td>"When will this arrive?"</td>
+                  <td>Product Launch</td>
+                  <td><span class="status pending">Neutral</span></td>
+                  <td>Yesterday</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 43210 98765</td>
+                  <td>"Great service!"</td>
+                  <td>Re-engagement</td>
+                  <td><span class="status active">Positive</span></td>
+                  <td>Jun 10</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 32109 87654</td>
+                  <td>"Please stop messaging"</td>
+                  <td>Flash Offer</td>
+                  <td><span class="status failed">Negative</span></td>
+                  <td>Jun 10</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+                <tr>
+                  <td class="fw-bold" style="color:var(--text-primary)">+91 21098 76543</td>
+                  <td>"Sounds interesting"</td>
+                  <td>Summer Sale</td>
+                  <td><span class="status active">Positive</span></td>
+                  <td>Jun 9</td>
+                  <td><div class="flex gap-2"><button class="btn-ghost" style="padding:4px;" title="Reply"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 00-4-4H4"/></svg></button><button class="btn-ghost" style="padding:4px;" title="View Chat"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="flex justify-between items-center mt-6 pt-4" style="border-top:1px solid var(--border);">
+            <span class="text-muted" style="font-size:13px;">Showing 1 to 8 of 1,234 responses</span>
+            <div class="flex gap-2">
+              <button class="btn-secondary" style="padding:6px 12px;" disabled>Previous</button>
+              <button class="btn-secondary" style="padding:6px 12px; background:var(--green-glow); color:var(--green); border-color:var(--border-accent);">1</button>
+              <button class="btn-secondary" style="padding:6px 12px;">2</button>
+              <button class="btn-secondary" style="padding:6px 12px;">Next</button>
+            </div>
+          </div>
+          
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script src="../js/nav.js"></script>
+  <script src="../js/sidebar.js"></script>
+</body>
+</html>

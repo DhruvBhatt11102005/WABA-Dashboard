@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Devices — WABA Dashboard</title>
+  <meta name="description" content="Manage your connected WhatsApp Business devices and phone numbers from one central hub."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script>window.PAGES_PREFIX = '../';</script>
+  <style>
+    /* ── My Devices page-specific styles ── */
+
+    /* Mini stats row */
+    .mini-stats-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .mini-stat-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 22px;
+      flex: 1;
+      min-width: 160px;
+      backdrop-filter: blur(10px);
+      transition: all var(--transition-slow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mini-stat-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      opacity: 0;
+      transition: opacity var(--transition-slow);
+    }
+
+    .mini-stat-card.green::after  { background: radial-gradient(ellipse at top left, rgba(37,211,102,0.06), transparent 60%); }
+    .mini-stat-card.blue::after   { background: radial-gradient(ellipse at top left, rgba(59,130,246,0.06), transparent 60%); }
+    .mini-stat-card.muted::after  { background: radial-gradient(ellipse at top left, rgba(255,255,255,0.03), transparent 60%); }
+
+    .mini-stat-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mini-stat-card:hover::after { opacity: 1; }
+
+    .mini-stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mini-stat-icon.green  { background: var(--green-glow);  color: var(--green); }
+    .mini-stat-icon.blue   { background: var(--blue-glow);   color: var(--blue); }
+    .mini-stat-icon.muted  { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+
+    .mini-stat-body {}
+
+    .mini-stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.5px;
+    }
+
+    .mini-stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    /* Device Grid — extended card styles */
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .device-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all var(--transition-slow);
+      cursor: default;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .device-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      background: transparent;
+      transition: background var(--transition-slow);
+    }
+
+    .device-card.active-device::before {
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+
+    .device-card.inactive-device::before {
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+    }
+
+    .device-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .device-card.active-device:hover {
+      border-color: rgba(37,211,102,0.25);
+      box-shadow: 0 8px 40px rgba(37,211,102,0.08);
+    }
+
+    /* Card top row: avatar + status badge */
+    .device-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .device-avatar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .device-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .device-avatar.active-avatar {
+      background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(18,140,126,0.10));
+      border: 1px solid rgba(37,211,102,0.2);
+    }
+
+    .device-avatar.inactive-avatar {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Pulsing ring for active devices */
+    .device-avatar.active-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: calc(var(--radius-md) + 4px);
+      border: 1.5px solid rgba(37,211,102,0.3);
+      animation: ring-pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes ring-pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50%       { opacity: 0; transform: scale(1.12); }
+    }
+
+    .device-avatar-info {}
+
+    .device-number {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    .device-name-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* Divider */
+    .device-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    /* Meta row */
+    .device-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .device-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .device-meta-item svg {
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .device-meta-item span.highlight {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .device-meta-item span.green-highlight {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* Action buttons row */
+    .device-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-manage {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--green-glow);
+      color: var(--green);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(37,211,102,0.2);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-manage:hover {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+    }
+
+    .btn-disconnect {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(239,68,68,0.08);
+      color: #ef4444;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 9px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(239,68,68,0.15);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-disconnect:hover {
+      background: rgba(239,68,68,0.15);
+      border-color: rgba(239,68,68,0.35);
+    }
+
+    /* Disabled state for inactive cards */
+    .device-card.inactive-device .btn-manage {
+      background: rgba(255,255,255,0.04);
+      color: var(--text-muted);
+      border-color: var(--border);
+    }
+
+    .device-card.inactive-device .btn-manage:hover {
+      background: rgba(255,255,255,0.07);
+      color: var(--text-secondary);
+      box-shadow: none;
+    }
+
+    /* "Add Device" empty-slot card */
+    .device-card-add {
+      background: transparent;
+      border: 2px dashed rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 220px;
+      cursor: pointer;
+      transition: all var(--transition-slow);
+      text-align: center;
+    }
+
+    .device-card-add:hover {
+      border-color: rgba(37,211,102,0.35);
+      background: rgba(37,211,102,0.03);
+    }
+
+    .device-card-add:hover .add-icon {
+      background: var(--green-glow);
+      color: var(--green);
+      transform: scale(1.08);
+    }
+
+    .add-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .add-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color var(--transition);
+    }
+
+    .device-card-add:hover .add-label {
+      color: var(--green);
+    }
+
+    .add-sublabel {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Info banner */
+    .devices-info-banner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(37,211,102,0.05);
+      border: 1px solid rgba(37,211,102,0.15);
+      border-radius: var(--radius-lg);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .devices-info-banner svg {
+      color: var(--green);
+      flex-shrink: 0;
+    }
+
+    .devices-info-banner strong {
+      color: var(--text-primary);
+    }
+
+    /* Section header */
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .section-title-label .count-chip {
+      background: var(--green-glow-2);
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(37,211,102,0.15);
+    }
+
+    /* Status indicator dot inside card header (right corner) */
+    .device-status-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    /* Connection quality bar */
+    .quality-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 16px;
+    }
+
+    .quality-bar span {
+      width: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      transition: background var(--transition);
+    }
+
+    .quality-bar.good span { background: var(--green); }
+    .quality-bar.good span:nth-child(4) { height: 16px; }
+    .quality-bar.good span:nth-child(3) { height: 12px; }
+    .quality-bar.good span:nth-child(2) { height: 8px; }
+    .quality-bar.good span:nth-child(1) { height: 5px; }
+
+    .quality-bar.fair span:nth-child(1) { height: 5px;  background: var(--amber); }
+    .quality-bar.fair span:nth-child(2) { height: 8px;  background: var(--amber); }
+    .quality-bar.fair span:nth-child(3) { height: 12px; background: rgba(255,255,255,0.1); }
+    .quality-bar.fair span:nth-child(4) { height: 16px; background: rgba(255,255,255,0.1); }
+
+    .quality-bar.offline span { background: rgba(255,255,255,0.08); }
+
+    @media (max-width: 768px) {
+      .mini-stats-row { gap: 10px; }
+      .device-grid    { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .mini-stat-card { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout" id="app-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+
+    <div class="main-content">
+      <!-- ── Header ── -->
+      <header class="header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">My Devices</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="live-clock">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span id="live-clock-time" class="live-clock-time">--:--:--</span>
+          </div>
+          <button class="header-btn" title="Notifications">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+            </svg>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="header-avatar" title="EE Admin">EE</div>
+        </div>
+      </header>
+
+      <!-- ── Page Content ── -->
+      <main class="page-content">
+
+        <!-- Page Header -->
+        <div class="page-header animate-fadeInUp">
+          <div>
+            <h1 class="page-title">My Devices</h1>
+            <p class="page-desc">Manage your connected WhatsApp numbers and device settings</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <!-- Search bar -->
+            <div class="search-bar" style="width:220px;">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" placeholder="Search devices…"/>
+            </div>
+            <button class="btn-primary" id="add-device-btn">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Add Device
+            </button>
+          </div>
+        </div>
+
+        <!-- Info Banner -->
+        <div class="devices-info-banner animate-fadeInUp animate-delay-1">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>
+            Your WABA plan supports up to <strong>5 connected devices</strong>. 
+            You are currently using <strong>2 of 5</strong> available slots. 
+            <a href="#" style="color:var(--green); font-weight:600; text-decoration:none;">Upgrade plan</a> to connect more.
+          </span>
+        </div>
+
+        <!-- Mini Stats Row -->
+        <div class="mini-stats-row animate-fadeInUp animate-delay-2">
+
+          <!-- Total Devices -->
+          <div class="mini-stat-card green">
+            <div class="mini-stat-icon green">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="5" y="2" width="14" height="20" rx="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="mini-stat-body">
+              <div class="mini-stat-value">3</div>
+              <div class="mini-stat-label">Total Devices</div>
+            </div>
+          </div>
+
+          <!-- Active -->
+          <div class="mini-stat-card blue">
+            <div class="mini-stat-icon blue">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="mini-stat-body">
+              <div class="mini-stat-value" style="color:var(--green);">2</div>
+              <div class="mini-stat-label">Active</div>
+            </div>
+          </div>
+
+          <!-- Inactive -->
+          <div class="mini-stat-card muted">
+            <div class="mini-stat-icon muted">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+              </svg>
+            </div>
+            <div class="mini-stat-body">
+              <div class="mini-stat-value" style="color:var(--text-muted);">1</div>
+              <div class="mini-stat-label">Inactive</div>
+            </div>
+          </div>
+
+          <!-- Messages Today (bonus stat) -->
+          <div class="mini-stat-card green">
+            <div class="mini-stat-icon green">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
+            </div>
+            <div class="mini-stat-body">
+              <div class="mini-stat-value">36</div>
+              <div class="mini-stat-label">Msgs Today</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Device Grid Section -->
+        <div class="section-title-row animate-fadeInUp animate-delay-3">
+          <div class="section-title-label">
+            Connected Numbers
+            <span class="count-chip">3 devices</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <!-- Filter tabs -->
+            <div class="tabs" style="margin-bottom:0; border-radius:var(--radius-md);">
+              <button class="tab-btn active">All</button>
+              <button class="tab-btn">Active</button>
+              <button class="tab-btn">Inactive</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards grid -->
+        <div class="device-grid">
+
+          <!-- ── Device 1: Primary Business (Active) ── -->
+          <div class="device-card active-device animate-fadeInUp animate-delay-3">
+            <div class="device-card-header">
+              <div class="device-avatar-wrap">
+                <div class="device-avatar active-avatar">📱</div>
+                <div class="device-avatar-info">
+                  <div class="device-number">+91 98765 43210</div>
+                  <div class="device-name-tag">Primary Business</div>
+                </div>
+              </div>
+              <div class="device-status-wrap">
+                <span class="status active">Active</span>
+                <div class="quality-bar good" title="Signal: Excellent">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="device-divider"></div>
+
+            <div class="device-meta-row">
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Last seen: <span class="highlight">&nbsp;2 mins ago</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+                Messages today: <span class="green-highlight">&nbsp;24</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                </svg>
+                Account type: <span class="highlight">&nbsp;Business API</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Quality rating: <span class="green-highlight">&nbsp;High ★★★</span>
+              </div>
+            </div>
+
+            <div class="device-actions">
+              <button class="btn-manage">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                Manage
+              </button>
+              <button class="btn-disconnect" title="Disconnect device">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+                </svg>
+                Disconnect
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Device 2: Support Line (Active) ── -->
+          <div class="device-card active-device animate-fadeInUp animate-delay-4">
+            <div class="device-card-header">
+              <div class="device-avatar-wrap">
+                <div class="device-avatar active-avatar">📱</div>
+                <div class="device-avatar-info">
+                  <div class="device-number">+91 87654 32109</div>
+                  <div class="device-name-tag">Support Line</div>
+                </div>
+              </div>
+              <div class="device-status-wrap">
+                <span class="status active">Active</span>
+                <div class="quality-bar fair" title="Signal: Fair">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="device-divider"></div>
+
+            <div class="device-meta-row">
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Last seen: <span class="highlight">&nbsp;5 mins ago</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+                Messages today: <span class="green-highlight">&nbsp;12</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                </svg>
+                Account type: <span class="highlight">&nbsp;Business API</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Quality rating: <span style="color:var(--amber); font-weight:600;">&nbsp;Medium ★★</span>
+              </div>
+            </div>
+
+            <div class="device-actions">
+              <button class="btn-manage">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                Manage
+              </button>
+              <button class="btn-disconnect" title="Disconnect device">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
+                </svg>
+                Disconnect
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Device 3: Marketing (Inactive) ── -->
+          <div class="device-card inactive-device animate-fadeInUp animate-delay-5">
+            <div class="device-card-header">
+              <div class="device-avatar-wrap">
+                <div class="device-avatar inactive-avatar">📵</div>
+                <div class="device-avatar-info">
+                  <div class="device-number" style="color:var(--text-secondary);">+91 76543 21098</div>
+                  <div class="device-name-tag">Marketing</div>
+                </div>
+              </div>
+              <div class="device-status-wrap">
+                <span class="status draft">Inactive</span>
+                <div class="quality-bar offline" title="Signal: Offline">
+                  <span style="height:5px;"></span>
+                  <span style="height:8px;"></span>
+                  <span style="height:12px;"></span>
+                  <span style="height:16px;"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="device-divider"></div>
+
+            <div class="device-meta-row">
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Last seen: <span style="color:var(--text-muted); font-weight:500;">&nbsp;2 days ago</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+                Messages today: <span style="color:var(--text-muted); font-weight:500;">&nbsp;0</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+                </svg>
+                Account type: <span class="highlight">&nbsp;Business API</span>
+              </div>
+              <div class="device-meta-item">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                </svg>
+                Status reason: <span style="color:#ef4444; font-weight:500;">&nbsp;Session expired</span>
+              </div>
+            </div>
+
+            <div class="device-actions">
+              <button class="btn-manage">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+                </svg>
+                Reconnect
+              </button>
+              <button class="btn-disconnect" title="Remove device">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
+                </svg>
+                Remove
+              </button>
+            </div>
+          </div>
+
+          <!-- ── Add New Device slot ── -->
+          <div class="device-card-add animate-fadeInUp animate-delay-6" id="add-slot-btn">
+            <div class="add-icon">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </div>
+            <div class="add-label">Add New Device</div>
+            <div class="add-sublabel">Connect a WhatsApp Business number</div>
+          </div>
+
+        </div>
+        <!-- /device-grid -->
+
+        <!-- Bottom Info Bar -->
+        <div class="info-bar animate-fadeInUp animate-delay-6" style="margin-top:28px;">
+          <div class="info-chip">
+            <div class="info-chip-icon green">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <span>End-to-end <strong>encrypted</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon blue">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span>Devices synced <strong>just now</strong></span>
+          </div>
+          <div class="info-bar-sep"></div>
+          <div class="info-chip">
+            <div class="info-chip-icon purple">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span>Slots used: <strong>3 / 5</strong></span>
+          </div>
+          <div class="info-bar-spacer"></div>
+          <button class="btn-ghost" style="font-size:12px;">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+            </svg>
+            Refresh Status
+          </button>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="../js/nav.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script>
+    /* ── Live clock ── */
+    (function () {
+      const el = document.getElementById('live-clock-time');
+      function tick() {
+        if (el) {
+          const now = new Date();
+          el.textContent = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    /* ── Mobile sidebar ── */
+    (function () {
+      const btn = document.getElementById('mobile-menu-btn');
+      const sidebar = document.querySelector('.sidebar');
+      if (!btn || !sidebar) return;
+
+      // Overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'sidebar-overlay';
+      document.body.appendChild(overlay);
+
+      btn.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+        overlay.classList.toggle('active');
+      });
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('mobile-open');
+        overlay.classList.remove('active');
+      });
+    })();
+
+    /* ── Tab filter (visual only) ── */
+    (function () {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    })();
+
+    /* ── Toast helper ── */
+    function showToast(msg, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          ${type === 'success'
+            ? '<polyline points="20 6 9 17 4 12"/>'
+            : '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>'}
+        </svg>
+        <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    }
+
+    /* ── Add Device button ── */
+    document.getElementById('add-device-btn').addEventListener('click', () => {
+      showToast('Opening device onboarding wizard…', 'success');
+    });
+    document.getElementById('add-slot-btn').addEventListener('click', () => {
+      showToast('Opening device onboarding wizard…', 'success');
+    });
+
+    /* ── Manage / Disconnect / Remove buttons ── */
+    document.querySelectorAll('.btn-manage').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card   = e.target.closest('.device-card');
+        const number = card.querySelector('.device-number').textContent.trim();
+        const label  = btn.textContent.trim();
+        if (label.includes('Reconnect')) {
+          showToast(`Initiating reconnection for ${number}…`, 'info');
+        } else {
+          showToast(`Opening settings for ${number}`, 'success');
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-disconnect').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card   = e.target.closest('.device-card');
+        const number = card.querySelector('.device-number').textContent.trim();
+        const label  = btn.textContent.trim();
+        if (label.includes('Remove')) {
+          showToast(`Device ${number} removed.`, 'error');
+        } else {
+          showToast(`Disconnecting ${number}…`, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

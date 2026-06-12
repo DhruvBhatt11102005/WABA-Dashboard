@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Auto Reply — WABA Dashboard</title>
+  <meta name="description" content="Set up automatic responses to incoming messages"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script>window.PAGES_PREFIX = '../';</script>
+  <style>
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .layout-grid { grid-template-columns: 1fr; }
+    }
+    .rule-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: all var(--transition);
+    }
+    .rule-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+    .rule-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .rule-content {
+      flex: 1;
+    }
+    .rule-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .keyword-badge {
+      display: inline-block;
+      background: var(--bg-glass);
+      color: var(--text-primary);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+    .reply-preview {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      background: var(--bg-glass);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border-left: 2px solid var(--green);
+    }
+    .rule-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .trigger-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout" id="app-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="breadcrumb">
+            <span>Dashboard</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">Auto Reply</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="live-clock">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span id="live-clock-time" class="live-clock-time">--:--:--</span>
+          </div>
+          <button class="header-btn" title="Notifications">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+            </svg>
+            <span class="notif-dot"></span>
+          </button>
+          <div class="header-avatar" title="EE Admin">EE</div>
+        </div>
+      </header>
+      <main class="page-content">
+        
+        <div class="page-header animate-fadeInUp">
+          <div>
+            <h1 class="page-title">Auto Reply</h1>
+            <p class="page-desc">Set up automatic responses to incoming messages</p>
+          </div>
+          <button class="btn-primary">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Create Rule
+          </button>
+        </div>
+
+        <div class="card animate-fadeInUp animate-delay-1" style="margin-bottom: 24px;">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-4">
+              <div class="rule-icon" style="background:var(--green-glow); color:var(--green);">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <h3 style="font-size:16px; font-weight:700; color:var(--text-primary);">Global Auto Reply Status</h3>
+                <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">When enabled, incoming messages will trigger active rules below.</p>
+              </div>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" checked />
+              <div class="toggle-slider"></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="layout-grid animate-fadeInUp animate-delay-2">
+          
+          <!-- Rules List -->
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <div class="tabs" style="margin-bottom:0;">
+                <button class="tab-btn active">All Rules (4)</button>
+                <button class="tab-btn">Active (3)</button>
+                <button class="tab-btn">Inactive (1)</button>
+              </div>
+            </div>
+
+            <!-- Rule 1 -->
+            <div class="rule-card">
+              <div class="rule-content">
+                <div class="rule-header">
+                  <div class="keyword-badge">Keyword: hello, hi, hey</div>
+                  <label class="toggle"><input type="checkbox" checked /><div class="toggle-slider"></div></label>
+                </div>
+                <div class="reply-preview">Hello! Welcome to our support. How can I help you?</div>
+                <div class="rule-footer">
+                  <div class="trigger-count">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Triggered 234 times
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="btn-ghost" title="Edit"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="btn-ghost" title="Delete" style="color: #ef4444;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rule 2 -->
+            <div class="rule-card">
+              <div class="rule-content">
+                <div class="rule-header">
+                  <div class="keyword-badge">Keyword: price, cost, pricing</div>
+                  <label class="toggle"><input type="checkbox" checked /><div class="toggle-slider"></div></label>
+                </div>
+                <div class="reply-preview">Please visit our pricing page at https://example.com/pricing or our team will contact you shortly.</div>
+                <div class="rule-footer">
+                  <div class="trigger-count">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Triggered 89 times
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="btn-ghost" title="Edit"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="btn-ghost" title="Delete" style="color: #ef4444;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rule 3 -->
+            <div class="rule-card" style="opacity:0.7;">
+              <div class="rule-content">
+                <div class="rule-header">
+                  <div class="keyword-badge">Keyword: order, track</div>
+                  <label class="toggle"><input type="checkbox" /><div class="toggle-slider"></div></label>
+                </div>
+                <div class="reply-preview" style="border-left-color: var(--text-muted);">To track your order, please share your 6-digit order ID.</div>
+                <div class="rule-footer">
+                  <div class="trigger-count">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Triggered 45 times
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="btn-ghost" title="Edit"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="btn-ghost" title="Delete" style="color: #ef4444;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rule 4 -->
+            <div class="rule-card">
+              <div class="rule-content">
+                <div class="rule-header">
+                  <div class="keyword-badge" style="background:var(--purple-glow); border-color:var(--purple); color:var(--purple-light);">Time-based: Outside Hours</div>
+                  <label class="toggle"><input type="checkbox" checked /><div class="toggle-slider"></div></label>
+                </div>
+                <div class="reply-preview" style="border-left-color: var(--purple-light);">We are currently closed. Our business hours are 9 AM to 6 PM IST. We will get back to you soon!</div>
+                <div class="rule-footer">
+                  <div class="trigger-count">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Triggered 156 times
+                  </div>
+                  <div class="flex gap-2">
+                    <button class="btn-ghost" title="Edit"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                    <button class="btn-ghost" title="Delete" style="color: #ef4444;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Tips Panel -->
+          <div>
+            <div class="card" style="position: sticky; top: 88px;">
+              <h3 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                <svg width="18" height="18" fill="none" stroke="var(--amber)" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Best Practices
+              </h3>
+              
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <div>
+                  <div style="font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Keep it concise</div>
+                  <div style="font-size:12px; color:var(--text-secondary); line-height:1.5;">WhatsApp users prefer short, direct messages. Get straight to the point in your auto-replies.</div>
+                </div>
+                
+                <div>
+                  <div style="font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Use broad keywords</div>
+                  <div style="font-size:12px; color:var(--text-secondary); line-height:1.5;">Add multiple variations (e.g., 'hi', 'hello', 'hey') to ensure your rule catches common greetings.</div>
+                </div>
+                
+                <div>
+                  <div style="font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">Set expectations</div>
+                  <div style="font-size:12px; color:var(--text-secondary); line-height:1.5;">If a human will follow up, let the user know approximately when they can expect a reply.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/sidebar.js"></script>
+</body>
+</html>
