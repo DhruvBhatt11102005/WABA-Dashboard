@@ -47,7 +47,7 @@
 
     .mini-stat-card.green::after  { background: radial-gradient(ellipse at top left, rgba(37,211,102,0.06), transparent 60%); }
     .mini-stat-card.blue::after   { background: radial-gradient(ellipse at top left, rgba(59,130,246,0.06), transparent 60%); }
-    .mini-stat-card.muted::after  { background: radial-gradient(ellipse at top left, rgba(255,255,255,0.03), transparent 60%); }
+    .mini-stat-card.muted::after  { background: radial-gradient(ellipse at top left, rgba(0,0,0,0.03), transparent 60%); }
 
     .mini-stat-card:hover {
       border-color: var(--border-hover);
@@ -69,7 +69,7 @@
 
     .mini-stat-icon.green  { background: var(--green-glow);  color: var(--green); }
     .mini-stat-icon.blue   { background: var(--blue-glow);   color: var(--blue); }
-    .mini-stat-icon.muted  { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+    .mini-stat-icon.muted  { background: rgba(0,0,0,0.06); color: var(--text-muted); }
 
     .mini-stat-body {}
 
@@ -127,7 +127,7 @@
     }
 
     .device-card.inactive-device::before {
-      background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+      background: linear-gradient(90deg, rgba(0,0,0,0.1), transparent);
     }
 
     .device-card:hover {
@@ -174,8 +174,8 @@
     }
 
     .device-avatar.inactive-avatar {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.08);
     }
 
     /* Pulsing ring for active devices */
@@ -300,13 +300,13 @@
 
     /* Disabled state for inactive cards */
     .device-card.inactive-device .btn-manage {
-      background: rgba(255,255,255,0.04);
+      background: rgba(0,0,0,0.04);
       color: var(--text-muted);
       border-color: var(--border);
     }
 
     .device-card.inactive-device .btn-manage:hover {
-      background: rgba(255,255,255,0.07);
+      background: rgba(0,0,0,0.07);
       color: var(--text-secondary);
       box-shadow: none;
     }
@@ -314,7 +314,7 @@
     /* "Add Device" empty-slot card */
     .device-card-add {
       background: transparent;
-      border: 2px dashed rgba(255,255,255,0.1);
+      border: 2px dashed rgba(0,0,0,0.1);
       border-radius: var(--radius-lg);
       padding: 24px;
       display: flex;
@@ -343,7 +343,7 @@
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.05);
       color: var(--text-muted);
       display: flex;
       align-items: center;
@@ -436,7 +436,7 @@
     .quality-bar span {
       width: 4px;
       border-radius: 2px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.1);
       transition: background var(--transition);
     }
 
@@ -448,10 +448,10 @@
 
     .quality-bar.fair span:nth-child(1) { height: 5px;  background: var(--amber); }
     .quality-bar.fair span:nth-child(2) { height: 8px;  background: var(--amber); }
-    .quality-bar.fair span:nth-child(3) { height: 12px; background: rgba(255,255,255,0.1); }
-    .quality-bar.fair span:nth-child(4) { height: 16px; background: rgba(255,255,255,0.1); }
+    .quality-bar.fair span:nth-child(3) { height: 12px; background: rgba(0,0,0,0.1); }
+    .quality-bar.fair span:nth-child(4) { height: 16px; background: rgba(0,0,0,0.1); }
 
-    .quality-bar.offline span { background: rgba(255,255,255,0.08); }
+    .quality-bar.offline span { background: rgba(0,0,0,0.08); }
 
     @media (max-width: 768px) {
       .mini-stats-row { gap: 10px; }

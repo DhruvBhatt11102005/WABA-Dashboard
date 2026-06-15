@@ -8,8 +8,8 @@
     amber:  '#f59e0b',
     blue:   '#3b82f6',
     teal:   '#14b8a6',
-    muted:  'rgba(255,255,255,0.08)',
-    gridLine: 'rgba(255,255,255,0.05)',
+    muted:  'rgba(0,0,0,0.08)',
+    gridLine: 'rgba(0,0,0,0.05)',
   };
 
   function hexToRgba(hex, alpha) {
@@ -26,11 +26,11 @@
     Chart.defaults.font.family = "'Inter', sans-serif";
     Chart.defaults.font.size = 12;
     Chart.defaults.plugins.legend.display = false;
-    Chart.defaults.plugins.tooltip.backgroundColor = '#0f1429';
-    Chart.defaults.plugins.tooltip.borderColor = 'rgba(255,255,255,0.1)';
+    Chart.defaults.plugins.tooltip.backgroundColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.borderColor = 'rgba(0,0,0,0.1)';
     Chart.defaults.plugins.tooltip.borderWidth = 1;
-    Chart.defaults.plugins.tooltip.titleColor = '#eef2ff';
-    Chart.defaults.plugins.tooltip.bodyColor = '#8892b0';
+    Chart.defaults.plugins.tooltip.titleColor = '#0f172a';
+    Chart.defaults.plugins.tooltip.bodyColor = '#475569';
     Chart.defaults.plugins.tooltip.padding = 10;
     Chart.defaults.plugins.tooltip.cornerRadius = 8;
   }
