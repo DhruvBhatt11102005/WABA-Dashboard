@@ -1,6 +1,6 @@
 /* ============================================================
    WABA Dashboard — Design System
-   Premium Dark Mode | Glassmorphism | WhatsApp Green
+   Premium Dark Mode | Glassmorphism | WhatsApp Blue
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -19,29 +19,29 @@
 
   /* Borders */
   --border:        rgba(0, 0, 0, 0.08);
-  --border-accent: rgba(37, 211, 102, 0.4);
+  --border-accent: rgba(0, 91, 181, 0.4);
   --border-hover:  rgba(0, 0, 0, 0.15);
 
   /* Text */
   --text-primary:    #0f172a;
   --text-secondary:  #475569;
   --text-muted:      #94a3b8;
-  --text-accent:     #16a34a;
+  --text-accent:     #0066cc;
 
   /* Accent colors */
-  --green:         #25d366;
-  --green-dark:    #128c7e;
-  --green-glow:    rgba(37, 211, 102, 0.15);
-  --green-glow-2:  rgba(37, 211, 102, 0.08);
+  --green:         #10b981;
+  --green-dark:    #059669;
+  --green-glow:    rgba(16, 185, 129, 0.15);
+  --green-glow-2:  rgba(16, 185, 129, 0.08);
   --purple:        #7c3aed;
   --purple-light:  #a78bfa;
   --purple-glow:   rgba(124, 58, 237, 0.15);
   --amber:         #f59e0b;
   --amber-light:   #fcd34d;
   --amber-glow:    rgba(245, 158, 11, 0.15);
-  --blue:          #3b82f6;
+  --blue:          #005bb5;
   --blue-light:    #93c5fd;
-  --blue-glow:     rgba(59, 130, 246, 0.15);
+  --blue-glow:     rgba(0, 91, 181, 0.15);
   --pink:          #ec4899;
   --pink-glow:     rgba(236, 72, 153, 0.15);
   --teal:          #14b8a6;
@@ -62,7 +62,7 @@
   --shadow-sm:   0 2px 8px rgba(0,0,0,0.05);
   --shadow-md:   0 4px 24px rgba(0,0,0,0.08);
   --shadow-lg:   0 8px 48px rgba(0,0,0,0.12);
-  --shadow-green: 0 4px 24px rgba(37,211,102,0.25);
+  --shadow-green: 0 4px 24px rgba(0,91,181,0.25);
 
   --transition: 0.2s ease;
   --transition-slow: 0.4s ease;
@@ -111,7 +111,7 @@ input, textarea, select { font-family: inherit; }
   flex-direction: column;
   transition: margin-left var(--transition-slow);
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37,211,102,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,91,181,0.07) 0%, transparent 60%),
     radial-gradient(ellipse 60% 40% at 90% 80%, rgba(124,58,237,0.05) 0%, transparent 60%),
     var(--bg-primary);
 }
@@ -514,7 +514,7 @@ input, textarea, select { font-family: inherit; }
   font-weight: 700;
   color: #fff;
   cursor: pointer;
-  border: 2px solid rgba(37,211,102,0.3);
+  border: 2px solid rgba(0,91,181,0.3);
   transition: all var(--transition);
 }
 
@@ -526,7 +526,7 @@ input, textarea, select { font-family: inherit; }
 /* ─── Welcome Banner ─────────────────────────────────────── */
 .welcome-banner {
   background:
-    linear-gradient(135deg, rgba(37,211,102,0.12) 0%, rgba(124,58,237,0.08) 50%, rgba(59,130,246,0.08) 100%),
+    linear-gradient(135deg, rgba(0,91,181,0.12) 0%, rgba(124,58,237,0.08) 50%, rgba(0,91,181,0.08) 100%),
     var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -546,7 +546,7 @@ input, textarea, select { font-family: inherit; }
   right: -10%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(37,211,102,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,91,181,0.08) 0%, transparent 70%);
   pointer-events: none;
   animation: pulse-glow 4s ease-in-out infinite;
 }
@@ -806,8 +806,8 @@ input, textarea, select { font-family: inherit; }
   display: flex;
   align-items: center;
   gap: 5px;
-  background: rgba(37,211,102,0.1);
-  border: 1px solid rgba(37,211,102,0.2);
+  background: rgba(0,91,181,0.1);
+  border: 1px solid rgba(0,91,181,0.2);
   color: var(--green);
   font-size: 11px;
   font-weight: 700;
@@ -838,13 +838,13 @@ input, textarea, select { font-family: inherit; }
   padding: 6px 12px;
   border-radius: var(--radius-sm);
   background: var(--green-glow-2);
-  border: 1px solid rgba(37,211,102,0.15);
+  border: 1px solid rgba(0,91,181,0.15);
   transition: all var(--transition);
 }
 
 .view-all-btn:hover {
   background: var(--green-glow);
-  border-color: rgba(37,211,102,0.3);
+  border-color: rgba(0,91,181,0.3);
 }
 
 /* ─── Analytics Chart ────────────────────────────────────── */
@@ -998,12 +998,12 @@ input, textarea, select { font-family: inherit; }
   border: none;
   cursor: pointer;
   transition: all var(--transition);
-  box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+  box-shadow: 0 4px 16px rgba(0,91,181,0.25);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+  box-shadow: 0 6px 24px rgba(0,91,181,0.35);
 }
 
 .btn-secondary {
@@ -1220,8 +1220,8 @@ tbody tr:last-child td {
 .form-select:focus,
 .form-textarea:focus {
   border-color: var(--green);
-  background: rgba(37,211,102,0.04);
-  box-shadow: 0 0 0 3px rgba(37,211,102,0.08);
+  background: rgba(0,91,181,0.04);
+  box-shadow: 0 0 0 3px rgba(0,91,181,0.08);
 }
 
 .form-select option {
@@ -1302,7 +1302,7 @@ tbody tr:last-child td {
 
 .search-bar:focus-within {
   border-color: var(--green);
-  background: rgba(37,211,102,0.04);
+  background: rgba(0,91,181,0.04);
 }
 
 .search-bar svg {
@@ -1549,7 +1549,7 @@ tbody tr:last-child td {
 
 .tab-btn.active {
   color: var(--green);
-  border-color: rgba(37,211,102,0.2);
+  border-color: rgba(0,91,181,0.2);
   background: var(--green-glow-2);
 }
 
@@ -1594,7 +1594,7 @@ tbody tr:last-child td {
   cursor: pointer;
   flex-shrink: 0;
   transition: all var(--transition);
-  border: 1px solid rgba(37,211,102,0.2);
+  border: 1px solid rgba(0,91,181,0.2);
 }
 
 .copy-btn:hover {

@@ -3,10 +3,10 @@
   'use strict';
 
   const COLORS = {
-    green:  '#25d366',
+    green:  '#10b981',
     purple: '#a78bfa',
     amber:  '#f59e0b',
-    blue:   '#3b82f6',
+    blue:   '#005bb5',
     teal:   '#14b8a6',
     muted:  'rgba(0,0,0,0.08)',
     gridLine: 'rgba(0,0,0,0.05)',
