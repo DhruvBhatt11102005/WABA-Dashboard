@@ -3,10 +3,10 @@
   'use strict';
 
   const COLORS = {
-    green:  '#10b981',
+    green:  '#0d57c8',
     purple: '#a78bfa',
     amber:  '#f59e0b',
-    blue:   '#005bb5',
+    blue:   '#1a6ae0',
     teal:   '#14b8a6',
     muted:  'rgba(0,0,0,0.08)',
     gridLine: 'rgba(0,0,0,0.05)',
@@ -74,14 +74,14 @@
           {
             label: 'Delivered',
             data: delivData,
-            borderColor: COLORS.blue,
-            backgroundColor: makeGradient(ctx.getContext('2d'), COLORS.blue),
+            borderColor: '#10b981',
+            backgroundColor: makeGradient(ctx.getContext('2d'), '#10b981'),
             borderWidth: 2.5,
             tension: 0.45,
             fill: true,
             pointRadius: 4,
             pointHoverRadius: 7,
-            pointBackgroundColor: COLORS.blue,
+            pointBackgroundColor: '#10b981',
             pointBorderColor: '#0b0f23',
             pointBorderWidth: 2,
           },
