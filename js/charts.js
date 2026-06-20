@@ -3,13 +3,13 @@
   'use strict';
 
   const COLORS = {
-    green:  '#0d57c8',
-    purple: '#a78bfa',
+    green:  '#2563eb', /* Primary Blue */
+    purple: '#8b5cf6',
     amber:  '#f59e0b',
-    blue:   '#1a6ae0',
+    blue:   '#0ea5e9',
     teal:   '#14b8a6',
-    muted:  'rgba(0,0,0,0.08)',
-    gridLine: 'rgba(0,0,0,0.05)',
+    muted:  'rgba(15, 23, 42, 0.08)',
+    gridLine: 'rgba(15, 23, 42, 0.05)',
   };
 
   function hexToRgba(hex, alpha) {
@@ -22,12 +22,12 @@
   /* ── Default Chart.js global config ── */
   function applyGlobalDefaults() {
     if (typeof Chart === 'undefined') return;
-    Chart.defaults.color = '#8892b0';
+    Chart.defaults.color = '#64748b';
     Chart.defaults.font.family = "'Inter', sans-serif";
     Chart.defaults.font.size = 12;
     Chart.defaults.plugins.legend.display = false;
-    Chart.defaults.plugins.tooltip.backgroundColor = '#ffffff';
-    Chart.defaults.plugins.tooltip.borderColor = 'rgba(0,0,0,0.1)';
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+    Chart.defaults.plugins.tooltip.borderColor = 'rgba(15, 23, 42, 0.08)';
     Chart.defaults.plugins.tooltip.borderWidth = 1;
     Chart.defaults.plugins.tooltip.titleColor = '#0f172a';
     Chart.defaults.plugins.tooltip.bodyColor = '#475569';
