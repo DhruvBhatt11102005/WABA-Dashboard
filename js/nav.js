@@ -11,10 +11,16 @@
   </button>
 
   <div class="sidebar-logo">
-    <div class="logo-icon">💬</div>
+    <div class="logo-icon seawind-logo" aria-hidden="true">
+      <svg class="seawind-logo-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path class="wind-line wind-line-1" d="M3 9c2.5 0 2.5-3 5-3s2.5 3 5 3"/>
+        <path class="wind-line wind-line-2" d="M2 13c3 0 3-3 6-3s3 3 6 3"/>
+        <path class="wind-line wind-line-3" d="M4 17c2 0 2-2 4-2s2 2 4 2"/>
+      </svg>
+    </div>
     <div class="logo-text">
       <h2>WABA Panel</h2>
-      <span>Seawind Solution</span>
+      <span>Seawind Solutions</span>
     </div>
   </div>
 
@@ -140,6 +146,12 @@
   </nav>
 
   <div class="sidebar-footer">
+    <div class="seawind-wave-strip" aria-hidden="true">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path class="seawind-wave-1" d="M0,30 C150,50 350,10 600,30 C850,50 1050,10 1200,30 L1200,60 L0,60 Z"/>
+        <path class="seawind-wave-2" d="M0,40 C200,20 400,55 600,40 C800,25 1000,55 1200,40 L1200,60 L0,60 Z"/>
+      </svg>
+    </div>
     <div class="sidebar-user">
       <div class="user-avatar">EE</div>
       <div class="user-info">
@@ -168,4 +180,10 @@
   } else {
     renderSidebar();
   }
+
+  /* Load UI enhancements on all pages */
+  const uiScript = document.createElement('script');
+  uiScript.src = PAGES_PREFIX + 'js/ui-enhancements.js';
+  uiScript.defer = true;
+  document.head.appendChild(uiScript);
 })();

@@ -3,59 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Live Chat — WABA Dashboard</title>
-  <meta name="description" content="Real-time WhatsApp chat interface"/>
+  <title>Live Chat &mdash; WABA Dashboard</title>
+  <meta name="description" content="Real-time WhatsApp conversations"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../css/style.css?v=3"/>
+  <link rel="stylesheet" href="../css/style.css?v=7"/>
   <script>window.PAGES_PREFIX = '../';</script>
-  <style>
-    .chat-bubble-wrap {
-      display: flex;
-      flex-direction: column;
-      max-width: 75%;
-    }
-    .chat-bubble-wrap.incoming {
-      align-self: flex-start;
-    }
-    .chat-bubble-wrap.outgoing {
-      align-self: flex-end;
-      align-items: flex-end;
-    }
-    
-    .msg-bubble {
-      padding: 10px 14px;
-      font-size: 14px;
-      line-height: 1.4;
-      position: relative;
-    }
-    
-    .incoming .msg-bubble {
-      background: var(--bg-glass);
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      border-radius: 12px 12px 12px 0;
-    }
-    
-    .outgoing .msg-bubble {
-      background: var(--green-dark);
-      color: #fff;
-      border-radius: 12px 12px 0 12px;
-    }
-    
-    .msg-time {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    
-    .outgoing .msg-time {
-      color: rgba(0,0,0,0.1);
-    }
-  </style>
 </head>
 <body>
   <div class="app-layout" id="app-layout">
@@ -63,7 +16,7 @@
     <div class="main-content">
       <header class="header">
         <div class="header-left">
-          <button class="mobile-menu-btn" id="mobile-menu-btn">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
@@ -81,247 +34,375 @@
             </svg>
             <span id="live-clock-time" class="live-clock-time">--:--:--</span>
           </div>
-          <button class="header-btn" title="Notifications">
+          <button class="header-btn" id="notifications-btn" aria-label="Notifications">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
             </svg>
             <span class="notif-dot"></span>
           </button>
-          <div class="header-avatar" title="EE Admin">EE</div>
+          <button class="header-btn" id="settings-btn" aria-label="Settings">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+          </button>
+          <div class="header-avatar" id="user-avatar-btn" title="EE Administrator">EE</div>
         </div>
       </header>
-      <main class="page-content" style="padding-bottom: 0; display:flex; flex-direction:column; height:calc(100vh - 64px);">
-        
-        <div class="chat-layout animate-fadeInUp">
-          
-          <!-- Sidebar: Chat List -->
-          <div class="chat-sidebar">
-            <div class="chat-sidebar-header">
-              <div class="flex justify-between items-center mb-4">
-                <h2 style="font-size:16px;font-weight:700;color:var(--text-primary);">Conversations</h2>
-                <button class="btn-ghost" style="padding:4px;" title="New Chat">
-                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                </button>
-              </div>
-              <div class="search-bar">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" placeholder="Search chats..."/>
-              </div>
-            </div>
-            
-            <div class="chat-list">
-              <div class="chat-item active">
-                <div class="chat-avatar" style="background:linear-gradient(135deg, var(--green-dark), var(--green));">RS</div>
-                <div style="flex:1; min-width:0;">
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-name">Rahul Sharma</span>
-                    <span class="chat-item-time">2m</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-preview" style="color:var(--text-primary); font-weight:500;">Thanks! I'll check now</span>
-                    <span class="nav-badge">1</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="chat-item">
-                <div class="chat-avatar" style="background:linear-gradient(135deg, var(--purple), var(--purple-light));">PP</div>
-                <div style="flex:1; min-width:0;">
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-name">Priya Patel</span>
-                    <span class="chat-item-time">15m</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-preview" style="color:var(--text-primary); font-weight:500;">When will my order arrive?</span>
-                    <span class="nav-badge" style="background:var(--blue);">2</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="chat-item">
-                <div class="chat-avatar" style="background:linear-gradient(135deg, var(--amber), var(--amber-light));">AK</div>
-                <div style="flex:1; min-width:0;">
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-name">Amit Kumar</span>
-                    <span class="chat-item-time">1h</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-preview">Got it, thank you</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="chat-item">
-                <div class="chat-avatar" style="background:linear-gradient(135deg, var(--pink), var(--pink-glow)); color: #fff;">SR</div>
-                <div style="flex:1; min-width:0;">
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-name">Sneha Rao</span>
-                    <span class="chat-item-time">3h</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-preview">Please send the invoice</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="chat-item">
-                <div class="chat-avatar" style="background:linear-gradient(135deg, var(--blue), var(--blue-light));">VS</div>
-                <div style="flex:1; min-width:0;">
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-name">Vikram Singh</span>
-                    <span class="chat-item-time">Yesterday</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="chat-item-preview">Hello, I need support</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+      <main class="page-content">
+        <div class="page-header animate-fadeInUp">
+          <div>
+            <h1 class="page-title">Live Chat</h1>
+            <p class="page-desc">Manage real-time WhatsApp conversations</p>
           </div>
-          
-          <!-- Main: Active Chat -->
-          <div class="chat-main">
-            <!-- Header -->
-            <div class="chat-main-header">
-              <div class="flex items-center gap-3">
-                <div class="chat-avatar" style="background:linear-gradient(135deg, var(--green-dark), var(--green));">RS</div>
-                <div>
-                  <div class="chat-item-name">Rahul Sharma</div>
-                  <div class="flex items-center gap-2" style="font-size:12px; color:var(--text-muted);">
-                    <span style="width:8px;height:8px;border-radius:50%;background:var(--green);"></span>
-                    Online
-                  </div>
-                </div>
-              </div>
-              <div class="flex gap-2">
-                <button class="btn-ghost" title="Call">
-                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                </button>
-                <button class="btn-ghost" title="Contact Info">
-                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                </button>
-              </div>
-            </div>
-            
-            <!-- Messages Area -->
-            <div class="chat-messages" id="chat-messages">
-              <div style="text-align:center; font-size:11px; color:var(--text-muted); margin:10px 0;">Today</div>
-              
-              <!-- Incoming -->
-              <div class="chat-bubble-wrap incoming">
-                <div class="msg-bubble">Hi, I need help with my order #12345</div>
-                <div class="msg-time">10:14 AM</div>
-              </div>
-              
-              <!-- Outgoing -->
-              <div class="chat-bubble-wrap outgoing">
-                <div class="msg-bubble">Hello Rahul! I can help you with that. Could you share your order details?</div>
-                <div class="msg-time">
-                  10:15 AM
-                  <svg width="14" height="14" viewBox="0 0 16 15" fill="none">
-                    <path d="M15.01 3.316l-8.57 8.57a.7.7 0 01-.99 0l-4.29-4.29a.7.7 0 01.99-.99l3.79 3.79 8.08-8.08a.7.7 0 01.99.99z" fill="#53bdeb"/>
-                  </svg>
-                </div>
-              </div>
-              
-              <!-- Incoming -->
-              <div class="chat-bubble-wrap incoming">
-                <div class="msg-bubble">Sure, the order was placed on June 10th for ?2,500</div>
-                <div class="msg-time">10:18 AM</div>
-              </div>
-              
-              <!-- Outgoing -->
-              <div class="chat-bubble-wrap outgoing">
-                <div class="msg-bubble">I can see your order. It will be delivered by June 15th. Is there anything else?</div>
-                <div class="msg-time">
-                  10:20 AM
-                  <svg width="14" height="14" viewBox="0 0 16 15" fill="none">
-                    <path d="M15.01 3.316l-8.57 8.57a.7.7 0 01-.99 0l-4.29-4.29a.7.7 0 01.99-.99l3.79 3.79 8.08-8.08a.7.7 0 01.99.99z" fill="#53bdeb"/>
-                  </svg>
-                </div>
-              </div>
-              
-              <!-- Incoming -->
-              <div class="chat-bubble-wrap incoming">
-                <div class="msg-bubble">Thanks! I will check now</div>
-                <div class="msg-time">10:24 AM</div>
-              </div>
-            </div>
-            
-            <!-- Input Bar -->
-            <div class="chat-input-bar">
-              <button class="btn-ghost" style="padding:8px; color:var(--text-muted);" title="Attach File">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
-              </button>
-              <button class="btn-ghost" style="padding:8px; color:var(--text-muted);" title="Insert Emoji">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-              </button>
-              
-              <input type="text" class="chat-input" id="chat-msg-input" placeholder="Type a message..."/>
-              
-              <button class="chat-send-btn" id="chat-send-btn" title="Send">
-                <svg width="18" height="18" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </button>
-            </div>
+          <div class="flex gap-3">
+            <span class="live-badge">
+              <span class="live-dot"></span>
+              3 active
+            </span>
+            <a href="send-message.html" class="btn-primary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              New Message
+            </a>
           </div>
-          
         </div>
 
+        <div class="live-chat-layout animate-fadeInUp animate-delay-1">
+          <!-- Conversation list -->
+          <aside class="chat-sidebar card" id="chat-sidebar">
+            <div class="chat-sidebar-header">
+              <div class="search-bar chat-search">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="chat-search-input" placeholder="Search conversations..." data-filter-target="#chat-thread-list .chat-thread"/>
+              </div>
+              <div class="chat-filter-tabs">
+                <button class="chat-filter-tab active" data-filter="all">All</button>
+                <button class="chat-filter-tab" data-filter="unread">Unread</button>
+                <button class="chat-filter-tab" data-filter="assigned">Assigned</button>
+              </div>
+            </div>
+            <div class="chat-thread-list" id="chat-thread-list">
+              <button class="chat-thread active" data-id="rahul" data-unread="true" data-assigned="true">
+                <div class="chat-thread-avatar a">R</div>
+                <div class="chat-thread-body">
+                  <div class="chat-thread-top">
+                    <span class="chat-thread-name">Rahul Sharma</span>
+                    <span class="chat-thread-time">10:24 AM</span>
+                  </div>
+                  <div class="chat-thread-preview">Yes please send more details!</div>
+                </div>
+                <span class="chat-unread-badge">2</span>
+              </button>
+              <button class="chat-thread" data-id="priya" data-unread="true" data-assigned="false">
+                <div class="chat-thread-avatar b">P</div>
+                <div class="chat-thread-body">
+                  <div class="chat-thread-top">
+                    <span class="chat-thread-name">Priya Patel</span>
+                    <span class="chat-thread-time">9:15 AM</span>
+                  </div>
+                  <div class="chat-thread-preview">When will my order arrive?</div>
+                </div>
+                <span class="chat-unread-badge">1</span>
+              </button>
+              <button class="chat-thread" data-id="amit" data-unread="false" data-assigned="true">
+                <div class="chat-thread-avatar c">A</div>
+                <div class="chat-thread-body">
+                  <div class="chat-thread-top">
+                    <span class="chat-thread-name">Amit Kumar</span>
+                    <span class="chat-thread-time">Yesterday</span>
+                  </div>
+                  <div class="chat-thread-preview">Got it, thank you so much!</div>
+                </div>
+              </button>
+              <button class="chat-thread" data-id="sneha" data-unread="false" data-assigned="false">
+                <div class="chat-thread-avatar d">S</div>
+                <div class="chat-thread-body">
+                  <div class="chat-thread-top">
+                    <span class="chat-thread-name">Sneha Reddy</span>
+                    <span class="chat-thread-time">Mon</span>
+                  </div>
+                  <div class="chat-thread-preview">Can I get a demo?</div>
+                </div>
+              </button>
+              <button class="chat-thread" data-id="vikram" data-unread="false" data-assigned="true">
+                <div class="chat-thread-avatar e">V</div>
+                <div class="chat-thread-body">
+                  <div class="chat-thread-top">
+                    <span class="chat-thread-name">Vikram Singh</span>
+                    <span class="chat-thread-time">Sun</span>
+                  </div>
+                  <div class="chat-thread-preview">Invoice received, thanks!</div>
+                </div>
+              </button>
+            </div>
+          </aside>
+
+          <!-- Chat pane -->
+          <section class="chat-pane card" id="chat-pane">
+            <div class="chat-pane-header">
+              <button class="chat-back-btn" id="chat-back-btn" aria-label="Back to conversations">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="15 18 9 12 15 6"/>
+                </svg>
+              </button>
+              <div class="chat-pane-contact">
+                <div class="chat-thread-avatar a" id="chat-contact-avatar">R</div>
+                <div>
+                  <div class="chat-pane-name" id="chat-contact-name">Rahul Sharma</div>
+                  <div class="chat-pane-status" id="chat-contact-status">
+                    <span class="status-dot online"></span> Online &middot; +91 98765 43210
+                  </div>
+                </div>
+              </div>
+              <div class="chat-pane-actions">
+                <button class="btn-ghost chat-action-btn" title="Assign to me" id="assign-btn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </button>
+                <button class="btn-ghost chat-action-btn" title="Mark resolved" id="resolve-btn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+              <div class="chat-date-divider"><span>Today</span></div>
+              <div class="chat-msg incoming">
+                <div class="chat-msg-bubble">Hi, I saw your Summer Sale campaign. Is the 30% discount still available?</div>
+                <div class="chat-msg-time">10:18 AM</div>
+              </div>
+              <div class="chat-msg outgoing">
+                <div class="chat-msg-bubble">Hello Rahul! Yes, the offer is valid until this Sunday. Would you like product details?</div>
+                <div class="chat-msg-time">10:20 AM
+                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="display:inline;vertical-align:middle;">
+                    <path d="M15.01 3.316l-8.57 8.57a.7.7 0 01-.99 0l-4.29-4.29a.7.7 0 01.99-.99l3.79 3.79 8.08-8.08a.7.7 0 01.99.99z" fill="#53bdeb"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="chat-msg incoming">
+                <div class="chat-msg-bubble">Yes please send more details!</div>
+                <div class="chat-msg-time">10:24 AM</div>
+              </div>
+            </div>
+
+            <div class="chat-compose">
+              <div class="chat-quick-replies">
+                <button class="chat-quick-reply" data-text="Thanks for reaching out! How can I help you today?">Greeting</button>
+                <button class="chat-quick-reply" data-text="Your order is on the way and will arrive in 2-3 business days.">Order status</button>
+                <button class="chat-quick-reply" data-text="I'll send the details shortly. One moment please!">Send details</button>
+              </div>
+              <div class="chat-input-row">
+                <button class="btn-ghost chat-action-btn" title="Attach file">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                  </svg>
+                </button>
+                <input type="text" class="form-input chat-input" id="chat-input" placeholder="Type a message..."/>
+                <button class="btn-primary chat-send-btn" id="chat-send-btn" aria-label="Send message">
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Contact info panel -->
+          <aside class="chat-info card" id="chat-info">
+            <div class="chat-info-header">
+              <div class="chat-info-avatar a" id="info-avatar">R</div>
+              <h3 id="info-name">Rahul Sharma</h3>
+              <p id="info-phone">+91 98765 43210</p>
+            </div>
+            <div class="chat-info-section">
+              <div class="chat-info-label">Tags</div>
+              <div class="flex gap-2" style="flex-wrap:wrap;">
+                <span class="category-chip">Lead</span>
+                <span class="category-chip">Hot</span>
+              </div>
+            </div>
+            <div class="chat-info-section">
+              <div class="chat-info-label">Last campaign</div>
+              <p class="chat-info-value">Summer Sale 2026</p>
+            </div>
+            <div class="chat-info-section">
+              <div class="chat-info-label">Notes</div>
+              <textarea class="form-textarea" rows="3" placeholder="Add internal notes...">Interested in bulk order. Follow up with pricing.</textarea>
+            </div>
+            <button class="btn-secondary" style="width:100%;" id="save-notes-btn">Save Notes</button>
+          </aside>
+        </div>
       </main>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script src="../js/nav.js"></script>
   <script src="../js/sidebar.js"></script>
+  <script src="../js/animations.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const msgsContainer = document.getElementById('chat-messages');
-      const input = document.getElementById('chat-msg-input');
-      const sendBtn = document.getElementById('chat-send-btn');
-      
-      // Scroll to bottom
-      msgsContainer.scrollTop = msgsContainer.scrollHeight;
-      
-      function sendMessage() {
-        const text = input.value.trim();
-        if(!text) return;
-        
-        const time = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-        
-        const html = `
-          <div class="chat-bubble-wrap outgoing" style="animation: fadeInUp 0.3s ease;">
-            <div class="msg-bubble">${text.replace(/\n/g, '<br>')}</div>
-            <div class="msg-time">
-              ${time}
-              <svg width="14" height="14" viewBox="0 0 16 15" fill="none">
-                <path d="M15.01 3.316l-8.57 8.57a.7.7 0 01-.99 0l-4.29-4.29a.7.7 0 01.99-.99l3.79 3.79 8.08-8.08a.7.7 0 01.99.99z" fill="#53bdeb"/>
-              </svg>
+    (function () {
+      const CONVERSATIONS = {
+        rahul: {
+          name: 'Rahul Sharma', avatar: 'a', letter: 'R', phone: '+91 98765 43210',
+          status: 'Online', assigned: true,
+          messages: [
+            { type: 'incoming', text: 'Hi, I saw your Summer Sale campaign. Is the 30% discount still available?', time: '10:18 AM' },
+            { type: 'outgoing', text: 'Hello Rahul! Yes, the offer is valid until this Sunday. Would you like product details?', time: '10:20 AM &middot; <svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="display:inline;vertical-align:middle;"><path d="M15.01 3.316l-8.57 8.57a.7.7 0 01-.99 0l-4.29-4.29a.7.7 0 01.99-.99l3.79 3.79 8.08-8.08a.7.7 0 01.99.99z" fill="#53bdeb"/></svg>' },
+            { type: 'incoming', text: 'Yes please send more details!', time: '10:24 AM' },
+          ]
+        },
+        priya: {
+          name: 'Priya Patel', avatar: 'b', letter: 'P', phone: '+91 87654 32109',
+          status: 'Last seen 5 min ago', assigned: false,
+          messages: [
+            { type: 'incoming', text: 'When will my order arrive?', time: '9:15 AM' },
+          ]
+        },
+        amit: {
+          name: 'Amit Kumar', avatar: 'c', letter: 'A', phone: '+91 76543 21098',
+          status: 'Offline', assigned: true,
+          messages: [
+            { type: 'outgoing', text: 'Your payment has been confirmed. Thank you!', time: 'Yesterday' },
+            { type: 'incoming', text: 'Got it, thank you so much!', time: 'Yesterday' },
+          ]
+        },
+        sneha: {
+          name: 'Sneha Reddy', avatar: 'd', letter: 'S', phone: '+91 65432 10987',
+          status: 'Online', assigned: false,
+          messages: [
+            { type: 'incoming', text: 'Can I get a demo?', time: 'Mon' },
+          ]
+        },
+        vikram: {
+          name: 'Vikram Singh', avatar: 'e', letter: 'V', phone: '+91 54321 09876',
+          status: 'Offline', assigned: true,
+          messages: [
+            { type: 'incoming', text: 'Invoice received, thanks!', time: 'Sun' },
+          ]
+        },
+      };
+
+      let activeId = 'rahul';
+      const messagesEl = document.getElementById('chat-messages');
+      const chatInput = document.getElementById('chat-input');
+      const chatPane = document.getElementById('chat-pane');
+      const chatSidebar = document.getElementById('chat-sidebar');
+
+      function renderMessages(id) {
+        const conv = CONVERSATIONS[id];
+        if (!conv) return;
+
+        messagesEl.innerHTML = `
+          <div class="chat-date-divider"><span>Today</span></div>
+          ${conv.messages.map(m => `
+            <div class="chat-msg ${m.type}">
+              <div class="chat-msg-bubble">${m.text}</div>
+              <div class="chat-msg-time">${m.time}</div>
             </div>
-          </div>
+          `).join('')}
         `;
-        
-        msgsContainer.insertAdjacentHTML('beforeend', html);
-        input.value = '';
-        msgsContainer.scrollTop = msgsContainer.scrollHeight;
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+
+        document.getElementById('chat-contact-name').textContent = conv.name;
+        document.getElementById('chat-contact-status').innerHTML =
+          `<span class="status-dot ${conv.status === 'Online' ? 'online' : ''}"></span> ${conv.status} &middot; ${conv.phone}`;
+        document.getElementById('info-name').textContent = conv.name;
+        document.getElementById('info-phone').textContent = conv.phone;
+
+        ['chat-contact-avatar', 'info-avatar'].forEach(elId => {
+          const el = document.getElementById(elId);
+          el.textContent = conv.letter;
+          el.className = el.className.replace(/\s[a-e]\b/g, '');
+          el.classList.add('chat-thread-avatar', conv.avatar);
+          if (elId === 'info-avatar') el.classList.add('chat-info-avatar');
+        });
       }
-      
-      sendBtn.addEventListener('click', sendMessage);
-      input.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter') sendMessage();
+
+      function selectThread(btn) {
+        document.querySelectorAll('.chat-thread').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        activeId = btn.dataset.id;
+        btn.querySelector('.chat-unread-badge')?.remove();
+        btn.dataset.unread = 'false';
+        renderMessages(activeId);
+        chatPane.classList.add('is-open');
+      }
+
+      document.querySelectorAll('.chat-thread').forEach(btn => {
+        btn.addEventListener('click', () => selectThread(btn));
       });
-      
-      // Chat items select
-      document.querySelectorAll('.chat-item').forEach(item => {
-        item.addEventListener('click', () => {
-          document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-          if(window.innerWidth < 900) {
-            // Logic for mobile view transition if needed
-          }
+
+      document.getElementById('chat-back-btn').addEventListener('click', () => {
+        chatPane.classList.remove('is-open');
+      });
+
+      function sendMessage(text) {
+        const trimmed = text.trim();
+        if (!trimmed) return;
+        const now = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        const readSvg = '<svg width="16" height="15" viewBox="0 0 16 15" fill="none" style="display:inline;vertical-align:middle;"><path d="M15.01 3.316l-8.57 8.57a.7.7 0 01-.99 0l-4.29-4.29a.7.7 0 01.99-.99l3.79 3.79 8.08-8.08a.7.7 0 01.99.99z" fill="#53bdeb"/></svg>';
+        CONVERSATIONS[activeId].messages.push({ type: 'outgoing', text: trimmed, time: now + ' ' + readSvg });
+        renderMessages(activeId);
+        chatInput.value = '';
+        window.showToast && window.showToast('Message sent', 'success');
+
+        setTimeout(() => {
+          const replies = ['Thanks!', 'Got it.', 'Will check and get back to you.', 'Sounds good!'];
+          const reply = replies[Math.floor(Math.random() * replies.length)];
+          CONVERSATIONS[activeId].messages.push({
+            type: 'incoming', text: reply, time: 'Just now'
+          });
+          renderMessages(activeId);
+        }, 1500 + Math.random() * 2000);
+      }
+
+      document.getElementById('chat-send-btn').addEventListener('click', () => sendMessage(chatInput.value));
+      chatInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); sendMessage(chatInput.value); }
+      });
+
+      document.querySelectorAll('.chat-quick-reply').forEach(btn => {
+        btn.addEventListener('click', () => {
+          chatInput.value = btn.dataset.text;
+          chatInput.focus();
         });
       });
-    });
+
+      document.getElementById('assign-btn').addEventListener('click', () => {
+        window.showToast && window.showToast('Conversation assigned to you', 'success');
+      });
+
+      document.getElementById('resolve-btn').addEventListener('click', () => {
+        window.showToast && window.showToast('Conversation marked as resolved', 'info');
+      });
+
+      document.getElementById('save-notes-btn').addEventListener('click', () => {
+        window.showToast && window.showToast('Notes saved', 'success');
+      });
+
+      /* Filter tabs */
+      document.querySelectorAll('.chat-filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.chat-filter-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const filter = tab.dataset.filter;
+          document.querySelectorAll('.chat-thread').forEach(thread => {
+            let show = true;
+            if (filter === 'unread') show = thread.dataset.unread === 'true';
+            if (filter === 'assigned') show = thread.dataset.assigned === 'true';
+            thread.style.display = show ? '' : 'none';
+          });
+        });
+      });
+    })();
   </script>
-  <script src="../js/animations.js"></script>
 </body>
 </html>

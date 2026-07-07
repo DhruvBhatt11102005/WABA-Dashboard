@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -7,7 +7,7 @@
   <meta name="description" content="Manage your connected WhatsApp Business devices and phone numbers from one central hub."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../css/style.css?v=3"/>
+  <link rel="stylesheet" href="../css/style.css?v=7"/>
   <script>window.PAGES_PREFIX = '../';</script>
   <style>
     /* -- My Devices page-specific styles -- */
@@ -520,7 +520,7 @@
               <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
               </svg>
-              <input type="text" placeholder="Search devices�"/>
+              <input type="text" placeholder="Search devices..."/>
             </div>
             <button class="btn-primary" id="add-device-btn">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -630,7 +630,9 @@
           <div class="device-card active-device animate-fadeInUp animate-delay-3">
             <div class="device-card-header">
               <div class="device-avatar-wrap">
-                <div class="device-avatar active-avatar">??</div>
+                <div class="device-avatar active-avatar">
+                  <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/></svg>
+                </div>
                 <div class="device-avatar-info">
                   <div class="device-number">+91 98765 43210</div>
                   <div class="device-name-tag">Primary Business</div>
@@ -669,7 +671,7 @@
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
-                Quality rating: <span class="green-highlight">&nbsp;High ???</span>
+                Quality rating: <span class="green-highlight">&nbsp;High</span>
               </div>
             </div>
 
@@ -693,7 +695,9 @@
           <div class="device-card active-device animate-fadeInUp animate-delay-4">
             <div class="device-card-header">
               <div class="device-avatar-wrap">
-                <div class="device-avatar active-avatar">??</div>
+                <div class="device-avatar active-avatar">
+                  <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/></svg>
+                </div>
                 <div class="device-avatar-info">
                   <div class="device-number">+91 87654 32109</div>
                   <div class="device-name-tag">Support Line</div>
@@ -732,7 +736,7 @@
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
-                Quality rating: <span style="color:var(--amber); font-weight:600;">&nbsp;Medium ??</span>
+                Quality rating: <span style="color:var(--amber); font-weight:600;">&nbsp;Medium</span>
               </div>
             </div>
 
@@ -756,7 +760,9 @@
           <div class="device-card inactive-device animate-fadeInUp animate-delay-5">
             <div class="device-card-header">
               <div class="device-avatar-wrap">
-                <div class="device-avatar inactive-avatar">??</div>
+                <div class="device-avatar inactive-avatar">
+                  <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="opacity:0.4;"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/></svg>
+                </div>
                 <div class="device-avatar-info">
                   <div class="device-number" style="color:var(--text-secondary);">+91 76543 21098</div>
                   <div class="device-name-tag">Marketing</div>
@@ -926,6 +932,10 @@
 
     /* -- Toast helper -- */
     function showToast(msg, type = 'success') {
+      if (window.showToast) {
+        window.showToast(msg, type);
+        return;
+      }
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
       toast.className = `toast ${type}`;
@@ -942,10 +952,10 @@
 
     /* -- Add Device button -- */
     document.getElementById('add-device-btn').addEventListener('click', () => {
-      showToast('Opening device onboarding wizard�', 'success');
+      showToast('Opening device onboarding wizard…', 'success');
     });
     document.getElementById('add-slot-btn').addEventListener('click', () => {
-      showToast('Opening device onboarding wizard�', 'success');
+      showToast('Opening device onboarding wizard…', 'success');
     });
 
     /* -- Manage / Disconnect / Remove buttons -- */
@@ -955,7 +965,7 @@
         const number = card.querySelector('.device-number').textContent.trim();
         const label  = btn.textContent.trim();
         if (label.includes('Reconnect')) {
-          showToast(`Initiating reconnection for ${number}�`, 'info');
+          showToast(`Initiating reconnection for ${number}…`, 'info');
         } else {
           showToast(`Opening settings for ${number}`, 'success');
         }
@@ -970,7 +980,7 @@
         if (label.includes('Remove')) {
           showToast(`Device ${number} removed.`, 'error');
         } else {
-          showToast(`Disconnecting ${number}�`, 'error');
+          showToast(`Disconnecting ${number}…`, 'error');
         }
       });
     });

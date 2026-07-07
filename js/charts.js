@@ -68,7 +68,7 @@
             pointRadius: 4,
             pointHoverRadius: 7,
             pointBackgroundColor: COLORS.green,
-            pointBorderColor: '#0b0f23',
+            pointBorderColor: '#ffffff',
             pointBorderWidth: 2,
           },
           {
@@ -82,7 +82,7 @@
             pointRadius: 4,
             pointHoverRadius: 7,
             pointBackgroundColor: '#10b981',
-            pointBorderColor: '#0b0f23',
+            pointBorderColor: '#ffffff',
             pointBorderWidth: 2,
           },
           {
@@ -96,7 +96,7 @@
             pointRadius: 4,
             pointHoverRadius: 7,
             pointBackgroundColor: COLORS.amber,
-            pointBorderColor: '#0b0f23',
+            pointBorderColor: '#ffffff',
             pointBorderWidth: 2,
           },
         ],
@@ -108,7 +108,7 @@
         scales: {
           x: {
             grid: { color: COLORS.gridLine, drawBorder: false },
-            ticks: { color: '#8892b0' },
+            ticks: { color: '#94a3b8' },
           },
           y: {
             grid: { color: COLORS.gridLine, drawBorder: false },
@@ -117,9 +117,9 @@
           },
         },
         plugins: {
-          legend: { display: true, position: 'top', labels: { color: '#8892b0', boxWidth: 8, usePointStyle: true } },
+          legend: { display: true, position: 'top', labels: { color: '#64748b', boxWidth: 8, usePointStyle: true } },
         },
-        animation: { duration: 1200, easing: 'easeOutQuart' },
+        animation: { duration: 1400, easing: 'easeOutQuart', delay: (ctx) => ctx.dataIndex * 80 },
       },
     });
 
@@ -142,7 +142,7 @@
         maintainAspectRatio: false,
         cutout: '72%',
         plugins: {
-          legend: { display: true, position: 'bottom', labels: { color: '#8892b0', padding: 12, usePointStyle: true } },
+          legend: { display: true, position: 'bottom', labels: { color: '#64748b', padding: 12, usePointStyle: true } },
         },
         animation: { duration: 900, easing: 'easeOutQuart' },
       },
@@ -163,7 +163,7 @@
         scales: {
           x: {
             grid: { color: COLORS.gridLine, drawBorder: false },
-            ticks: { color: '#8892b0' },
+            ticks: { color: '#94a3b8' },
           },
           y: {
             grid: { color: COLORS.gridLine, drawBorder: false },
@@ -172,7 +172,7 @@
           },
         },
         plugins: {
-          legend: { display: true, position: 'top', labels: { color: '#8892b0', boxWidth: 8, usePointStyle: true } },
+          legend: { display: true, position: 'top', labels: { color: '#64748b', boxWidth: 8, usePointStyle: true } },
         },
         animation: { duration: 1000, easing: 'easeOutQuart' },
       },
