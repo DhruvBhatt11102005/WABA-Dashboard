@@ -1,90 +1,90 @@
 /* ============================================================
    WABA Dashboard — Design System v8
-   Seawind Solutions Brand | Ocean & Wind Theme
+   Purple Theme | Multi-shade Violet Palette
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 /* ─── CSS Variables ─────────────────────────────────────────── */
 :root {
-  /* Backgrounds */
-  --bg-root:       #f0f9ff;
-  --bg-primary:    #f8fafc;
-  --bg-secondary:  #ecfeff;
+  /* Backgrounds — soft lavender/mauve tints */
+  --bg-root:       #f5f3ff;
+  --bg-primary:    #faf9ff;
+  --bg-secondary:  #ede9fe;
   --bg-card:       #ffffff;
-  --bg-card-hover: #f8faff;
+  --bg-card-hover: #faf8ff;
   --bg-sidebar:    #ffffff;
-  --bg-glass:      rgba(255, 255, 255, 0.82);
-  --bg-glass-2:    rgba(255, 255, 255, 0.65);
+  --bg-glass:      rgba(255, 255, 255, 0.86);
+  --bg-glass-2:    rgba(255, 255, 255, 0.68);
 
-  /* Sidebar (light) */
+  /* Sidebar */
   --sidebar-text:        #64748b;
   --sidebar-text-hover:  #0f172a;
   --sidebar-text-muted:  #94a3b8;
-  --sidebar-hover-bg:    #f1f5f9;
-  --sidebar-border:      rgba(15, 23, 42, 0.08);
+  --sidebar-hover-bg:    #f5f3ff;
+  --sidebar-border:      rgba(109, 40, 217, 0.08);
 
   /* Borders */
-  --border:        rgba(15, 23, 42, 0.08);
-  --border-accent: rgba(37, 99, 235, 0.28);
-  --border-hover:  rgba(37, 99, 235, 0.18);
-  --border-card:   rgba(15, 23, 42, 0.06);
+  --border:        rgba(109, 40, 217, 0.10);
+  --border-accent: rgba(124, 58, 237, 0.28);
+  --border-hover:  rgba(124, 58, 237, 0.20);
+  --border-card:   rgba(109, 40, 217, 0.07);
 
   /* Text */
   --text-primary:    #0f172a;
   --text-secondary:  #475569;
   --text-muted:      #94a3b8;
-  --text-accent:     #0891b2;
+  --text-accent:     #7c3aed;
 
-  /* Primary Accent — Seawind Sea */
-  --green:         #0891b2;
-  --green-dark:    #0e7490;
-  --green-bright:  #22d3ee;
-  --green-glow:    rgba(8, 145, 178, 0.14);
-  --green-glow-2:  rgba(8, 145, 178, 0.07);
+  /* Primary Accent — Violet */
+  --green:         #7c3aed;
+  --green-dark:    #6d28d9;
+  --green-bright:  #a78bfa;
+  --green-glow:    rgba(124, 58, 237, 0.13);
+  --green-glow-2:  rgba(124, 58, 237, 0.07);
 
-  /* Seawind Solutions — brand palette */
-  --seawind-deep:   #0c4a6e;
-  --seawind-sea:    #0891b2;
-  --seawind-sky:    #0ea5e9;
-  --seawind-wind:   #38bdf8;
-  --seawind-foam:   #ecfeff;
-  --seawind-glow:   rgba(8, 145, 178, 0.14);
+  /* Purple palette */
+  --seawind-deep:   #3b0764;
+  --seawind-sea:    #7c3aed;
+  --seawind-sky:    #9333ea;
+  --seawind-wind:   #a78bfa;
+  --seawind-foam:   #f5f3ff;
+  --seawind-glow:   rgba(124, 58, 237, 0.13);
 
   /* Gradients */
-  --gradient-primary:   linear-gradient(135deg, #0c4a6e 0%, #0891b2 50%, #0ea5e9 100%);
-  --gradient-hero:      linear-gradient(135deg, #0c4a6e 0%, #0891b2 40%, #38bdf8 100%);
-  --gradient-seawind:   linear-gradient(135deg, #0c4a6e 0%, #0891b2 45%, #38bdf8 100%);
-  --gradient-seawind-soft: linear-gradient(160deg, rgba(8,145,178,0.10) 0%, rgba(56,189,248,0.05) 50%, rgba(255,255,255,0) 100%);
-  --gradient-sidebar:   linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%);
-  --gradient-card-blue: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(37,99,235,0.02) 100%);
-  --gradient-warm:      linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-  --gradient-teal:      linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
-  --gradient-purple:    linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-primary:      linear-gradient(135deg, #3b0764 0%, #6d28d9 35%, #9333ea 70%, #c4b5fd 100%);
+  --gradient-hero:         linear-gradient(135deg, #3b0764 0%, #7c3aed 45%, #c4b5fd 100%);
+  --gradient-seawind:      linear-gradient(135deg, #3b0764 0%, #6d28d9 50%, #a78bfa 100%);
+  --gradient-seawind-soft: linear-gradient(160deg, rgba(124,58,237,0.10) 0%, rgba(167,139,250,0.05) 50%, rgba(255,255,255,0) 100%);
+  --gradient-sidebar:      linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+  --gradient-card-blue:    linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(124,58,237,0.02) 100%);
+  --gradient-warm:         linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --gradient-teal:         linear-gradient(135deg, #9333ea 0%, #c026d3 100%);
+  --gradient-purple:       linear-gradient(135deg, #6d28d9 0%, #9333ea 100%);
 
-  /* Supporting colors */
-  --purple:        #8b5cf6;
+  /* Supporting colors — kept for stat card variety */
+  --purple:        #9333ea;
   --purple-light:  #a78bfa;
-  --purple-glow:   rgba(139, 92, 246, 0.14);
+  --purple-glow:   rgba(147, 51, 234, 0.14);
   --amber:         #f59e0b;
   --amber-light:   #fcd34d;
   --amber-glow:    rgba(245, 158, 11, 0.14);
-  --blue:          #0ea5e9;
-  --blue-light:    #38bdf8;
-  --blue-glow:     rgba(14, 165, 233, 0.14);
-  --pink:          #ec4899;
-  --pink-glow:     rgba(236, 72, 153, 0.12);
-  --teal:          #14b8a6;
-  --teal-glow:     rgba(20, 184, 166, 0.12);
-  --emerald:       #10b981;
-  --emerald-glow:  rgba(16, 185, 129, 0.12);
+  --blue:          #6d28d9;
+  --blue-light:    #a78bfa;
+  --blue-glow:     rgba(109, 40, 217, 0.13);
+  --pink:          #c026d3;
+  --pink-glow:     rgba(192, 38, 211, 0.12);
+  --teal:          #7c3aed;
+  --teal-glow:     rgba(124, 58, 237, 0.12);
+  --emerald:       #9333ea;
+  --emerald-glow:  rgba(147, 51, 234, 0.12);
 
-  /* Sidebar */
+  /* Layout */
   --sidebar-width:         268px;
   --sidebar-collapsed:     72px;
   --header-height:         64px;
 
-  /* Effects */
+  /* Radii */
   --radius-sm:   8px;
   --radius-md:   12px;
   --radius-lg:   16px;
@@ -92,13 +92,13 @@
   --radius-2xl:  32px;
   --radius-full: 9999px;
 
-  --shadow-sm:     0 1px 3px rgba(15, 23, 42, 0.04), 0 2px 8px rgba(15, 23, 42, 0.03);
-  --shadow-md:     0 4px 20px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.03);
-  --shadow-lg:     0 12px 40px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
-  --shadow-sidebar: 1px 0 0 var(--sidebar-border), 4px 0 24px rgba(15, 23, 42, 0.04);
-  --shadow-blue:   0 8px 32px rgba(37, 99, 235, 0.28);
-  --shadow-card:   0 1px 3px rgba(15,23,42,0.04), 0 8px 24px rgba(37,99,235,0.06);
-  --shadow-hover:  0 16px 48px rgba(37, 99, 235, 0.14), 0 4px 12px rgba(15,23,42,0.06);
+  --shadow-sm:     0 1px 3px rgba(109, 40, 217, 0.04), 0 2px 8px rgba(109, 40, 217, 0.03);
+  --shadow-md:     0 4px 20px rgba(109, 40, 217, 0.06), 0 2px 6px rgba(109, 40, 217, 0.03);
+  --shadow-lg:     0 12px 40px rgba(109, 40, 217, 0.08), 0 4px 12px rgba(109, 40, 217, 0.04);
+  --shadow-sidebar: 1px 0 0 var(--sidebar-border), 4px 0 24px rgba(109, 40, 217, 0.05);
+  --shadow-blue:   0 8px 32px rgba(124, 58, 237, 0.26);
+  --shadow-card:   0 1px 3px rgba(109,40,217,0.04), 0 8px 24px rgba(124,58,237,0.08);
+  --shadow-hover:  0 16px 48px rgba(124, 58, 237, 0.16), 0 4px 12px rgba(109,40,217,0.06);
 
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.38s cubic-bezier(0.4, 0, 0.2, 1);
@@ -131,8 +131,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   background-image:
-    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(8,145,178,0.07) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 45% at 100% 100%, rgba(56,189,248,0.06) 0%, transparent 55%);
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(59,7,100,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 45% at 100% 100%, rgba(167,139,250,0.08) 0%, transparent 55%);
   background-size: 100% 100%;
 }
 
@@ -144,22 +144,22 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(1.5px 1.5px at 40px 60px, rgba(37,99,235,0.06) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 120px 140px, rgba(14,165,233,0.04) 0%, transparent 100%);
+    radial-gradient(1.5px 1.5px at 40px 60px, rgba(124,58,237,0.07) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 120px 140px, rgba(196,181,253,0.05) 0%, transparent 100%);
   background-size: 200px 200px;
   opacity: 0.7;
 }
 
-/* Seawind flow lines */
+/* Purple flow lines */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.42;
+  opacity: 0.38;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cg fill='none' stroke='%230891b2' stroke-opacity='0.07' stroke-width='2'%3E%3Cpath d='M-50 170 C120 120, 280 230, 460 180 S820 110, 1040 165 S1380 230, 1650 140'/%3E%3Cpath d='M-40 310 C150 250, 310 360, 510 320 S890 250, 1130 305 S1420 360, 1660 290'/%3E%3Cpath d='M-60 520 C130 460, 330 560, 540 515 S930 450, 1160 500 S1450 560, 1670 485'/%3E%3C/g%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cg fill='none' stroke='%237c3aed' stroke-opacity='0.07' stroke-width='2'%3E%3Cpath d='M-50 170 C120 120, 280 230, 460 180 S820 110, 1040 165 S1380 230, 1650 140'/%3E%3Cpath d='M-40 310 C150 250, 310 360, 510 320 S890 250, 1130 305 S1420 360, 1660 290'/%3E%3Cpath d='M-60 520 C130 460, 330 560, 540 515 S930 450, 1160 500 S1450 560, 1670 485'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 1600px 900px;
   background-repeat: repeat;
   animation: seawind-lines 28s linear infinite;
@@ -568,12 +568,12 @@ input, textarea, select { font-family: inherit; }
 }
 
 .seawind-wave-1 {
-  fill: rgba(56, 189, 248, 0.14);
+  fill: rgba(196, 181, 253, 0.22);
   animation: seawind-wave-a 10s ease-in-out infinite alternate;
 }
 
 .seawind-wave-2 {
-  fill: rgba(8, 145, 178, 0.12);
+  fill: rgba(124, 58, 237, 0.14);
   animation: seawind-wave-b 13s ease-in-out infinite alternate;
 }
 
@@ -711,13 +711,13 @@ input, textarea, select { font-family: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(16,185,129,0.10);
-  border: 1px solid rgba(16,185,129,0.25);
+  background: rgba(196,181,253,0.15);
+  border: 1px solid rgba(167,139,250,0.30);
   border-radius: var(--radius-full);
   padding: 4px 12px;
   font-size: 11.5px;
   font-weight: 600;
-  color: #059669;
+  color: #6d28d9;
   white-space: nowrap;
 }
 
@@ -725,7 +725,7 @@ input, textarea, select { font-family: inherit; }
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10b981;
+  background: #a78bfa;
   animation: status-blink 2s ease-in-out infinite;
 }
 
@@ -926,8 +926,8 @@ input, textarea, select { font-family: inherit; }
   color: var(--text-primary);
   margin-bottom: 8px;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #0c4a6e 0%, #0891b2 35%, #0ea5e9 65%, #38bdf8 100%);
-  background-size: 200% auto;
+  background: linear-gradient(135deg, #3b0764 0%, #6d28d9 25%, #9333ea 55%, #a78bfa 80%, #c4b5fd 100%);
+  background-size: 220% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1036,7 +1036,7 @@ input, textarea, select { font-family: inherit; }
   left: 0;
   width: 100%;
   height: 80px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2338bdf8' fill-opacity='0.3' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%230ea5e9' fill-opacity='0.2' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23c4b5fd' fill-opacity='0.32' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%23a78bfa' fill-opacity='0.20' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
