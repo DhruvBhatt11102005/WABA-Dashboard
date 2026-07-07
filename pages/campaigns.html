@@ -9,6 +9,132 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css?v=7"/>
   <script>window.PAGES_PREFIX = '../';</script>
+  <style>
+    /* ── Light Purple Theme Override (Campaigns preview) ── */
+    :root {
+      /* Backgrounds — soft lavender tints */
+      --bg-root:       #f5f3ff;
+      --bg-primary:    #faf9ff;
+      --bg-secondary:  #f0ebff;
+      --bg-card:       #ffffff;
+      --bg-card-hover: #faf8ff;
+      --bg-glass:      rgba(255, 255, 255, 0.85);
+
+      /* Primary accent — violet / lavender */
+      --green:         #7c3aed;
+      --green-dark:    #6d28d9;
+      --green-bright:  #a78bfa;
+      --green-glow:    rgba(124, 58, 237, 0.13);
+      --green-glow-2:  rgba(124, 58, 237, 0.07);
+
+      /* Borders */
+      --border:        rgba(109, 40, 217, 0.10);
+      --border-accent: rgba(124, 58, 237, 0.30);
+      --border-hover:  rgba(124, 58, 237, 0.20);
+      --border-card:   rgba(109, 40, 217, 0.07);
+
+      /* Text */
+      --text-accent:   #7c3aed;
+
+      /* Sidebar */
+      --sidebar-hover-bg: #f5f3ff;
+      --sidebar-border:   rgba(109, 40, 217, 0.08);
+
+      /* Gradients */
+      --gradient-primary:  linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #a78bfa 100%);
+      --gradient-hero:     linear-gradient(135deg, #4c1d95 0%, #7c3aed 45%, #c4b5fd 100%);
+      --gradient-seawind:  linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #a78bfa 100%);
+      --gradient-sidebar:  linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+
+      /* Seawind brand palette → purple equivalents */
+      --seawind-deep:  #4c1d95;
+      --seawind-sea:   #7c3aed;
+      --seawind-sky:   #8b5cf6;
+      --seawind-wind:  #a78bfa;
+      --seawind-foam:  #f5f3ff;
+      --seawind-glow:  rgba(124, 58, 237, 0.13);
+
+      /* Shadows */
+      --shadow-blue:   0 8px 32px rgba(124, 58, 237, 0.22);
+      --shadow-card:   0 1px 3px rgba(109,40,217,0.04), 0 8px 24px rgba(124,58,237,0.08);
+      --shadow-hover:  0 16px 48px rgba(124, 58, 237, 0.16), 0 4px 12px rgba(109,40,217,0.06);
+    }
+
+    /* Header status pill — purple tint */
+    .header-status-pill {
+      background: rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.22);
+      color: #7c3aed;
+    }
+    .header-status-dot { background: #8b5cf6; }
+
+    /* Body background radials */
+    body {
+      background-image:
+        radial-gradient(ellipse 70% 50% at 0% 0%, rgba(124,58,237,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 45% at 100% 100%, rgba(167,139,250,0.06) 0%, transparent 55%);
+    }
+
+    /* Stat card green → purple */
+    .stat-card.green  { --accent-from: #7c3aed; --accent-to: #a78bfa; --accent-glow: rgba(124,58,237,0.13); }
+
+    /* Active nav item */
+    .nav-item.active { background: rgba(124,58,237,0.10); color: #7c3aed; }
+    .nav-item.active::after { background: linear-gradient(180deg, #7c3aed, #a78bfa); }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #6d28d9, #7c3aed);
+      box-shadow: 0 4px 14px rgba(124,58,237,0.30);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #5b21b6, #6d28d9);
+      box-shadow: 0 6px 20px rgba(124,58,237,0.40);
+    }
+
+    /* Live badge dot */
+    .live-dot { background: #8b5cf6; }
+    .live-badge { border-color: rgba(124,58,237,0.25); color: #7c3aed; background: rgba(124,58,237,0.08); }
+
+    /* Notif dot */
+    .notif-dot { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+
+    /* Header avatar */
+    .header-avatar { background: linear-gradient(135deg, #4c1d95, #7c3aed); box-shadow: 0 2px 12px rgba(124,58,237,0.3); }
+
+    /* Nav badge */
+    .nav-badge { background: #7c3aed; }
+
+    /* Sidebar logo */
+    .logo-icon { background: linear-gradient(135deg, #4c1d95, #7c3aed, #a78bfa); box-shadow: 0 4px 16px rgba(124,58,237,0.32); }
+
+    /* Sidebar toggle hover */
+    .sidebar-toggle:hover { background: #7c3aed; border-color: #7c3aed; }
+
+    /* User avatar in sidebar */
+    .user-avatar { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
+
+    /* Breadcrumb current */
+    .breadcrumb-current { background: linear-gradient(135deg, #4c1d95, #7c3aed, #a78bfa); -webkit-background-clip: text; background-clip: text; }
+
+    /* Info chip icons */
+    .info-chip-icon.green { background: rgba(124,58,237,0.12); color: #7c3aed; }
+    .info-chip-icon.blue  { background: rgba(124,58,237,0.10); color: #7c3aed; }
+    .info-chip-icon.purple { background: rgba(124,58,237,0.12); color: #7c3aed; }
+
+    /* Status active */
+    .status.active { background: rgba(124,58,237,0.10); color: #7c3aed; }
+
+    /* Wave colors in stat cards */
+    .stat-card::after { filter: hue-rotate(200deg); }
+
+    /* Seawind wave lines body overlay */
+    body::after { filter: hue-rotate(200deg); }
+
+    /* Page header wave */
+    .wave-path-1 { fill: #e9d5ff !important; }
+    .wave-path-2 { fill: #f3e8ff !important; }
+  </style>
 </head>
 <body>
   <div class="app-layout" id="app-layout">

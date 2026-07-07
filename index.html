@@ -10,6 +10,227 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css?v=7"/>
   <script>window.PAGES_PREFIX = '';</script>
+  <style>
+    /* ══════════════════════════════════════════════════════
+       PURPLE PALETTE — Home Page
+       Deep Violet #3b0764  ·  Plum #6d28d9  ·  Violet #7c3aed
+       Orchid #9333ea  ·  Lavender #a78bfa  ·  Lilac #c4b5fd
+       Soft mauve #ede9fe  ·  Blush lavender #f5f3ff
+    ══════════════════════════════════════════════════════ */
+    :root {
+      /* Backgrounds — layered lavender/mauve tints */
+      --bg-root:       #f5f3ff;
+      --bg-primary:    #faf9ff;
+      --bg-secondary:  #ede9fe;
+      --bg-card:       #ffffff;
+      --bg-card-hover: #faf8ff;
+      --bg-glass:      rgba(255,255,255,0.86);
+
+      /* Primary = orchid/violet */
+      --green:        #7c3aed;
+      --green-dark:   #6d28d9;
+      --green-bright: #a78bfa;
+      --green-glow:   rgba(124,58,237,0.13);
+      --green-glow-2: rgba(124,58,237,0.07);
+
+      /* Borders */
+      --border:        rgba(109,40,217,0.10);
+      --border-accent: rgba(124,58,237,0.28);
+      --border-hover:  rgba(124,58,237,0.20);
+      --border-card:   rgba(109,40,217,0.07);
+
+      --text-accent: #7c3aed;
+      --sidebar-hover-bg: #f5f3ff;
+      --sidebar-border:   rgba(109,40,217,0.08);
+
+      --gradient-primary: linear-gradient(135deg,#3b0764 0%,#6d28d9 40%,#9333ea 75%,#c4b5fd 100%);
+      --gradient-hero:    linear-gradient(135deg,#3b0764 0%,#7c3aed 45%,#c4b5fd 100%);
+      --gradient-seawind: linear-gradient(135deg,#3b0764 0%,#6d28d9 50%,#a78bfa 100%);
+      --gradient-sidebar: linear-gradient(180deg,#ffffff 0%,#f5f3ff 100%);
+
+      --seawind-deep: #3b0764;
+      --seawind-sea:  #7c3aed;
+      --seawind-sky:  #9333ea;
+      --seawind-wind: #a78bfa;
+      --seawind-foam: #f5f3ff;
+      --seawind-glow: rgba(124,58,237,0.13);
+
+      --shadow-blue:  0 8px 32px rgba(124,58,237,0.22);
+      --shadow-card:  0 1px 3px rgba(109,40,217,0.04),0 8px 24px rgba(124,58,237,0.08);
+      --shadow-hover: 0 16px 48px rgba(124,58,237,0.16),0 4px 12px rgba(109,40,217,0.06);
+    }
+
+    /* ── Background — deep violet + plum radials ── */
+    body {
+      background-image:
+        radial-gradient(ellipse 70% 50% at 0% 0%,   rgba(59,7,100,0.09)   0%, transparent 55%),
+        radial-gradient(ellipse 60% 45% at 100% 100%,rgba(167,139,250,0.08) 0%, transparent 55%);
+    }
+    body::before {
+      background-image:
+        radial-gradient(1.5px 1.5px at 40px 60px,  rgba(124,58,237,0.07) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 120px 140px, rgba(196,181,253,0.05) 0%, transparent 100%);
+      background-size: 200px 200px;
+    }
+    body::after { filter: hue-rotate(200deg); opacity: 0.38; }
+
+    /* ── Sidebar ── */
+    /* Logo — deep violet → orchid → lavender */
+    .logo-icon { background: linear-gradient(135deg,#3b0764,#7c3aed,#c4b5fd); box-shadow: 0 4px 16px rgba(124,58,237,0.32); }
+    .sidebar-toggle:hover { background: #9333ea; border-color: #9333ea; }
+    /* User avatar — plum → orchid */
+    .user-avatar { background: linear-gradient(135deg,#6d28d9,#9333ea); box-shadow: 0 2px 8px rgba(147,51,234,0.28); border-color: #ede9fe; }
+    /* Nav badge — plum */
+    .nav-badge { background: #6d28d9; }
+    /* Active nav — lilac bg, violet text, lavender left bar */
+    .nav-item.active { background: rgba(196,181,253,0.18); color: #6d28d9; }
+    .nav-item.active::after { background: linear-gradient(180deg,#3b0764,#7c3aed,#c4b5fd); }
+    /* Sidebar footer waves — orchid/lavender */
+    .seawind-wave-1 { fill: rgba(196,181,253,0.22) !important; }
+    .seawind-wave-2 { fill: rgba(124,58,237,0.14) !important; }
+
+    /* ── Header ── */
+    /* Avatar — deep violet → orchid */
+    .header-avatar { background: linear-gradient(135deg,#3b0764,#9333ea); box-shadow: 0 2px 12px rgba(147,51,234,0.3); border-color: rgba(196,181,253,0.35); }
+    .header-avatar:hover { border-color: #a78bfa; box-shadow: 0 4px 20px rgba(124,58,237,0.38); }
+    /* Breadcrumb — violet → lavender */
+    .breadcrumb-current { background: linear-gradient(135deg,#3b0764,#7c3aed,#c4b5fd); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    /* Notif dot — orchid */
+    .notif-dot { background: linear-gradient(135deg,#9333ea,#c4b5fd); }
+    .header-btn:hover { background: rgba(196,181,253,0.18); color: #7c3aed; border-color: rgba(124,58,237,0.25); }
+    /* Status pill — mauve/lilac */
+    .header-status-pill { background: rgba(196,181,253,0.15); border-color: rgba(167,139,250,0.30); color: #6d28d9; }
+    .header-status-dot { background: #a78bfa; box-shadow: 0 0 6px rgba(167,139,250,0.5); }
+    /* Live clock */
+    .live-clock { border-color: rgba(196,181,253,0.25); }
+
+    /* ── Welcome Banner ── */
+    /* H1 — deep violet → plum → orchid → lavender → lilac */
+    .welcome-text h1 {
+      background: linear-gradient(135deg,#3b0764 0%,#6d28d9 25%,#9333ea 55%,#a78bfa 80%,#c4b5fd 100%);
+      background-size: 220% auto;
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      animation: gradient-shift 8s ease-in-out infinite;
+    }
+    /* Floating shapes — different purples */
+    .banner-shape-1 { background: linear-gradient(135deg,rgba(109,40,217,0.10),rgba(196,181,253,0.08)); }
+    .banner-shape-2 { background: linear-gradient(135deg,rgba(167,139,250,0.09),rgba(237,233,254,0.12)); }
+
+    /* ── Buttons ── */
+    /* Primary — plum → orchid */
+    .btn-primary { background: linear-gradient(135deg,#6d28d9,#9333ea); box-shadow: 0 4px 14px rgba(147,51,234,0.30); }
+    .btn-primary:hover { background: linear-gradient(135deg,#5b21b6,#7c3aed); box-shadow: 0 6px 20px rgba(147,51,234,0.42); }
+    /* Secondary — lilac border on hover */
+    .btn-secondary:hover { border-color: rgba(167,139,250,0.35); color: #7c3aed; }
+
+    /* ── Stat Cards — each a different purple shade ── */
+    /* Green card → violet */
+    .stat-card.green  { --accent-from:#7c3aed; --accent-to:#c4b5fd; --accent-glow:rgba(124,58,237,0.13); }
+    .stat-icon.green  { background: rgba(124,58,237,0.12); color: #7c3aed; }
+    .stat-footer-dot.green { background: #7c3aed; }
+
+    /* Purple card → orchid (already purple, make it richer) */
+    .stat-card.purple { --accent-from:#9333ea; --accent-to:#e879f9; --accent-glow:rgba(147,51,234,0.14); }
+    .stat-icon.purple { background: rgba(147,51,234,0.12); color: #9333ea; }
+
+    /* Amber card — keep warm amber but pair with mauve */
+    .stat-card.amber  { --accent-from:#c026d3; --accent-to:#f59e0b; --accent-glow:rgba(192,38,211,0.12); }
+
+    /* Blue card → plum/deep violet */
+    .stat-card.blue   { --accent-from:#4c1d95; --accent-to:#7c3aed; --accent-glow:rgba(76,29,149,0.13); }
+    .stat-icon.blue   { background: rgba(76,29,149,0.10); color: #4c1d95; }
+    .stat-footer-dot.blue { background: #6d28d9; }
+
+    .stat-trend.up   { background: rgba(167,139,250,0.15); color: #6d28d9; }
+    .stat-trend.flat { background: rgba(196,181,253,0.12); color: #94a3b8; }
+    .stat-card::after { filter: hue-rotate(200deg); }
+
+    /* ── Analytics Card ── */
+    /* Message Analytics card icon — orchid */
+    .card-icon { }
+
+    /* ── Live badge ── */
+    .live-dot   { background: #a78bfa; box-shadow: 0 0 6px rgba(167,139,250,0.5); }
+    .live-badge { background: rgba(196,181,253,0.14); border-color: rgba(167,139,250,0.28); color: #6d28d9; }
+
+    /* ── Delivery progress bar — plum → lavender ── */
+    .delivery-progress-bar { background: linear-gradient(90deg,#6d28d9,#a78bfa,#c4b5fd); }
+    .delivery-progress-track { background: rgba(196,181,253,0.20); }
+
+    /* ── Status badges ── */
+    .status.active  { background: rgba(124,58,237,0.10); color: #7c3aed; border: none; }
+    .status.sent    { background: rgba(76,29,149,0.08);  color: #4c1d95; }
+    .status.pending { background: rgba(192,38,211,0.09); color: #c026d3; }
+
+    /* ── Quick Actions ── */
+    /* Each icon a different purple */
+    .qa-icon.green  { background: rgba(124,58,237,0.12); color: #7c3aed; }   /* violet */
+    .qa-icon.purple { background: rgba(147,51,234,0.12); color: #9333ea; }   /* orchid */
+    .qa-icon.blue   { background: rgba(76,29,149,0.10);  color: #4c1d95; }   /* deep violet */
+    .qa-icon.amber  { background: rgba(192,38,211,0.10); color: #c026d3; }   /* fuchsia */
+
+    /* ── Activity row icons ── */
+    .activity-row-icon.green  { background: rgba(124,58,237,0.12); color: #7c3aed; }
+    .activity-row-icon.blue   { background: rgba(76,29,149,0.10);  color: #4c1d95; }
+    .activity-row-icon.amber  { background: rgba(192,38,211,0.10); color: #c026d3; }
+
+    /* ── Reply avatars — each a different purple ── */
+    .reply-avatar.a { background: linear-gradient(135deg,#6d28d9,#9333ea); }   /* plum → orchid */
+    .reply-avatar.b { background: linear-gradient(135deg,#9333ea,#c4b5fd); }   /* orchid → lilac */
+    .reply-avatar.c { background: linear-gradient(135deg,#3b0764,#6d28d9); }   /* deep violet → plum */
+
+    /* ── Info bar chips ── */
+    .info-chip-icon.green  { background: rgba(124,58,237,0.12); color: #7c3aed; }
+    .info-chip-icon.blue   { background: rgba(76,29,149,0.10);  color: #4c1d95; }
+    .info-chip-icon.purple { background: rgba(147,51,234,0.12); color: #9333ea; }
+
+    /* ── Cards — card icon overrides ── */
+    /* Message Analytics icon — orchid */
+    .card:nth-child(1) .card-icon { background: rgba(147,51,234,0.13) !important; color: #9333ea !important; }
+    /* Quick Actions icon — fuchsia */
+    .card:nth-child(2) .card-icon { background: rgba(192,38,211,0.11) !important; color: #c026d3 !important; }
+
+    /* ── Recent Campaigns card icon — deep violet ── */
+    .card-icon[style*="purple-glow"] { background: rgba(76,29,149,0.12) !important; color: #4c1d95 !important; }
+    /* Recent Replies card icon — violet */
+    .card-icon[style*="green-glow"]  { background: rgba(124,58,237,0.12) !important; color: #7c3aed !important; }
+
+    /* ── Stat card bottom waves — purple shades ── */
+    /* Each card gets its own wave color via nth-child */
+    .stat-card::after {
+      filter: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23c4b5fd' fill-opacity='0.35' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%23a78bfa' fill-opacity='0.25' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+    /* Card 1 (green/violet) — lilac + lavender waves */
+    .stats-grid .stat-card:nth-child(1)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23c4b5fd' fill-opacity='0.38' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%237c3aed' fill-opacity='0.15' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+    /* Card 2 (purple/orchid) — orchid + pink-purple waves */
+    .stats-grid .stat-card:nth-child(2)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23e879f9' fill-opacity='0.22' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%239333ea' fill-opacity='0.18' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+    /* Card 3 (amber/mauve) — mauve + fuchsia waves */
+    .stats-grid .stat-card:nth-child(3)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f0abfc' fill-opacity='0.28' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%23c026d3' fill-opacity='0.15' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+    /* Card 4 (blue/deep violet) — deep violet + plum waves */
+    .stats-grid .stat-card:nth-child(4)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%236d28d9' fill-opacity='0.18' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%234c1d95' fill-opacity='0.14' d='M0,256L48,240C96,224,192,192,288,197.3C384,203,480,245,576,250.7C672,256,768,224,864,202.7C960,181,1056,171,1152,181.3C1248,192,1344,224,1392,240L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    }
+
+    /* ── Wave paths in page header / info bar ── */
+    .wave-path-1 { fill: #ddd6fe !important; fill-opacity: 0.45 !important; }
+    .wave-path-2 { fill: #ede9fe !important; fill-opacity: 0.55 !important; }
+    ::-webkit-scrollbar-thumb       { background: rgba(167,139,250,0.22); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.35); }
+
+    /* ── View all button ── */
+    .view-all-btn:hover { color: #7c3aed; }
+
+    /* ── Card border accent on hover ── */
+    .card:hover { border-color: rgba(167,139,250,0.22); }
+    .stat-card:hover { border-color: rgba(167,139,250,0.28); }
+  </style>
 </head>
 <body>
   <div class="app-layout" id="app-layout">
