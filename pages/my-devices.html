@@ -1,9 +1,9 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Devices ï¿½ WABA Dashboard</title>
+  <title>My Devices ? WABA Dashboard</title>
   <meta name="description" content="Manage your connected WhatsApp Business devices and phone numbers from one central hub."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -45,8 +45,8 @@
       transition: opacity var(--transition-slow);
     }
 
-    .mini-stat-card.green::after  { background: radial-gradient(ellipse at top left, rgba(0,91,181,0.06), transparent 60%); }
-    .mini-stat-card.blue::after   { background: radial-gradient(ellipse at top left, rgba(0,91,181,0.06), transparent 60%); }
+    .mini-stat-card.green::after  { background: radial-gradient(ellipse at top left, rgba(124,111,205,0.06), transparent 60%); }
+    .mini-stat-card.blue::after   { background: radial-gradient(ellipse at top left, rgba(124,111,205,0.06), transparent 60%); }
     .mini-stat-card.muted::after  { background: radial-gradient(ellipse at top left, rgba(0,0,0,0.03), transparent 60%); }
 
     .mini-stat-card:hover {
@@ -96,7 +96,7 @@
       margin-top: 3px;
     }
 
-    /* Device Grid ï¿½ extended card styles */
+    /* Device Grid ? extended card styles */
     .device-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -143,8 +143,8 @@
     }
 
     .device-card.active-device:hover {
-      border-color: rgba(0,91,181,0.25);
-      box-shadow: 0 8px 40px rgba(0,91,181,0.08);
+      border-color: rgba(124,111,205,0.25);
+      box-shadow: 0 8px 40px rgba(124,111,205,0.08);
     }
 
     /* Card top row: avatar + status badge */
@@ -174,8 +174,8 @@
     }
 
     .device-avatar.active-avatar {
-      background: linear-gradient(135deg, rgba(0,91,181,0.15), rgba(0,59,128,0.10));
-      border: 1px solid rgba(0,91,181,0.2);
+      background: linear-gradient(135deg, rgba(124,111,205,0.15), rgba(74,63,143,0.10));
+      border: 1px solid rgba(124,111,205,0.2);
     }
 
     .device-avatar.inactive-avatar {
@@ -189,7 +189,7 @@
       position: absolute;
       inset: -4px;
       border-radius: calc(var(--radius-md) + 4px);
-      border: 1.5px solid rgba(0,91,181,0.3);
+      border: 1.5px solid rgba(124,111,205,0.3);
       animation: ring-pulse 2.4s ease-in-out infinite;
     }
 
@@ -270,7 +270,7 @@
       font-weight: 600;
       padding: 9px 16px;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(0,91,181,0.2);
+      border: 1px solid rgba(124,111,205,0.2);
       cursor: pointer;
       transition: all var(--transition);
     }
@@ -279,7 +279,7 @@
       background: var(--green);
       color: #fff;
       border-color: var(--green);
-      box-shadow: 0 4px 16px rgba(0,91,181,0.25);
+      box-shadow: 0 4px 16px rgba(124,111,205,0.25);
     }
 
     .btn-disconnect {
@@ -334,8 +334,8 @@
     }
 
     .device-card-add:hover {
-      border-color: rgba(0,91,181,0.35);
-      background: rgba(0,91,181,0.03);
+      border-color: rgba(124,111,205,0.35);
+      background: rgba(124,111,205,0.03);
     }
 
     .device-card-add:hover .add-icon {
@@ -377,8 +377,8 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(0,91,181,0.05);
-      border: 1px solid rgba(0,91,181,0.15);
+      background: rgba(124,111,205,0.05);
+      border: 1px solid rgba(124,111,205,0.15);
       border-radius: var(--radius-lg);
       padding: 14px 20px;
       margin-bottom: 24px;
@@ -419,7 +419,7 @@
       font-weight: 700;
       padding: 2px 8px;
       border-radius: var(--radius-full);
-      border: 1px solid rgba(0,91,181,0.15);
+      border: 1px solid rgba(124,111,205,0.15);
     }
 
     /* Status indicator dot inside card header (right corner) */
@@ -952,10 +952,10 @@
 
     /* -- Add Device button -- */
     document.getElementById('add-device-btn').addEventListener('click', () => {
-      showToast('Opening device onboarding wizardâ€¦', 'success');
+      showToast('Opening device onboarding wizard…', 'success');
     });
     document.getElementById('add-slot-btn').addEventListener('click', () => {
-      showToast('Opening device onboarding wizardâ€¦', 'success');
+      showToast('Opening device onboarding wizard…', 'success');
     });
 
     /* -- Manage / Disconnect / Remove buttons -- */
@@ -965,7 +965,7 @@
         const number = card.querySelector('.device-number').textContent.trim();
         const label  = btn.textContent.trim();
         if (label.includes('Reconnect')) {
-          showToast(`Initiating reconnection for ${number}â€¦`, 'info');
+          showToast(`Initiating reconnection for ${number}…`, 'info');
         } else {
           showToast(`Opening settings for ${number}`, 'success');
         }
@@ -980,7 +980,7 @@
         if (label.includes('Remove')) {
           showToast(`Device ${number} removed.`, 'error');
         } else {
-          showToast(`Disconnecting ${number}â€¦`, 'error');
+          showToast(`Disconnecting ${number}…`, 'error');
         }
       });
     });
@@ -988,5 +988,7 @@
   <script src="../js/animations.js"></script>
 </body>
 </html>
+
+
 
 
