@@ -2476,12 +2476,12 @@ tbody tr:last-child td {
 
 .wave-path-1 {
   animation: waveFlow1 12s linear infinite;
-  fill: #7dd3fc !important;
+  fill: #d4cff5 !important;
 }
 
 .wave-path-2 {
   animation: waveFlow2 22s linear infinite;
-  fill: #bae6fd !important;
+  fill: #b8b0e8 !important;
 }
 
 @keyframes waveFlow1 {
