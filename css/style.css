@@ -1474,23 +1474,24 @@ input, textarea, select { font-family: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: #ffffff;
-  color: var(--cta-violet);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   font-size: 13px;
   font-weight: 600;
   padding: 10px 20px;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(124, 58, 237, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   cursor: pointer;
   transition: all var(--transition);
   letter-spacing: 0.01em;
 }
 
 .btn-secondary:hover {
-  background: rgba(124, 58, 237, 0.04);
-  border-color: rgba(124, 58, 237, 0.35);
+  background: #ffffff;
+  color: var(--cta-violet);
+  border-color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.10);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn-secondary:active {
