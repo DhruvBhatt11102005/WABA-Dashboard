@@ -3,11 +3,11 @@
   'use strict';
 
   const COLORS = {
-    green:  '#2563eb', /* Primary Blue */
-    purple: '#8b5cf6',
-    amber:  '#f59e0b',
-    blue:   '#0ea5e9',
-    teal:   '#14b8a6',
+    green:  '#10B981',
+    purple: '#7C3AED',
+    amber:  '#F59E0B',
+    blue:   '#3B82F6',
+    teal:   '#14B8A6',
     muted:  'rgba(15, 23, 42, 0.08)',
     gridLine: 'rgba(15, 23, 42, 0.05)',
   };

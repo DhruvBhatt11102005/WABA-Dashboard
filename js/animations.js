@@ -117,9 +117,9 @@
     if (!banner) return;
 
     [
-      { w: 70, top: '12%', left: '58%', color: 'rgba(124,111,205,0.09)',  dur: '7s',  delay: '0s'   },
-      { w: 45, top: '65%', left: '72%', color: 'rgba(155,143,224,0.10)', dur: '9s',  delay: '1s'   },
-      { w: 30, top: '25%', left: '88%', color: 'rgba(184,176,232,0.08)', dur: '6s',  delay: '0.5s' },
+      { w: 70, top: '12%', left: '58%', color: 'rgba(124,58,237,0.07)',  dur: '7s',  delay: '0s'   },
+      { w: 45, top: '65%', left: '72%', color: 'rgba(139,92,246,0.08)', dur: '9s',  delay: '1s'   },
+      { w: 30, top: '25%', left: '88%', color: 'rgba(167,139,250,0.06)', dur: '6s',  delay: '0.5s' },
     ].forEach(p => {
       const orb = document.createElement('span');
       orb.className = 'banner-particle';

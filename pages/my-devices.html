@@ -7,7 +7,7 @@
   <meta name="description" content="Manage your connected WhatsApp Business devices and phone numbers from one central hub."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="../css/style.css?v=7"/>
+  <link rel="stylesheet" href="../css/style.css?v=8"/>
   <script>window.PAGES_PREFIX = '../';</script>
   <style>
     /* -- My Devices page-specific styles -- */
@@ -952,10 +952,10 @@
 
     /* -- Add Device button -- */
     document.getElementById('add-device-btn').addEventListener('click', () => {
-      showToast('Opening device onboarding wizard…', 'success');
+      showToast('Opening device onboarding wizardï¿½', 'success');
     });
     document.getElementById('add-slot-btn').addEventListener('click', () => {
-      showToast('Opening device onboarding wizard…', 'success');
+      showToast('Opening device onboarding wizardï¿½', 'success');
     });
 
     /* -- Manage / Disconnect / Remove buttons -- */
@@ -965,7 +965,7 @@
         const number = card.querySelector('.device-number').textContent.trim();
         const label  = btn.textContent.trim();
         if (label.includes('Reconnect')) {
-          showToast(`Initiating reconnection for ${number}…`, 'info');
+          showToast(`Initiating reconnection for ${number}ï¿½`, 'info');
         } else {
           showToast(`Opening settings for ${number}`, 'success');
         }
@@ -980,7 +980,7 @@
         if (label.includes('Remove')) {
           showToast(`Device ${number} removed.`, 'error');
         } else {
-          showToast(`Disconnecting ${number}…`, 'error');
+          showToast(`Disconnecting ${number}ï¿½`, 'error');
         }
       });
     });
