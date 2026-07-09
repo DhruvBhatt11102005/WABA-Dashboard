@@ -7,60 +7,61 @@
 
 /* ─── CSS Variables ─────────────────────────────────────────── */
 :root {
-  /* ── Canvas Backgrounds ── */
-  --bg-root:       #F8FAFC;
-  --bg-primary:    #F1F5F9;
-  --bg-secondary:  #EEF2FF;
-  --bg-card:       #ffffff;
-  --bg-card-hover: #FAFAFA;
-  --bg-sidebar:    #ffffff;
-  --bg-glass:      rgba(255, 255, 255, 0.92);
-  --bg-glass-2:    rgba(255, 255, 255, 0.75);
+  /* ── Canvas ── */
+  --bg-root:       #FBFBFE;   /* soothing off-white with hint of blue/purple */
+  --bg-primary:    #F5F3FF;   /* very light pale wisteria wash */
+  --bg-secondary:  #EFEBFD;   /* slightly richer wisteria wash */
+  --bg-card:       #FFFFFF;
+  --bg-card-hover: #FAF9FE;
+  --bg-sidebar:    #1F1A3A;   /* dark desaturated navy-violet */
+  --bg-glass:      rgba(255,255,255,0.94);
+  --bg-glass-2:    rgba(255,255,255,0.76);
 
-  /* ── Sidebar — dark violet identity ── */
-  --sidebar-text:        rgba(255,255,255,0.60);
+  /* ── Sidebar — dark desaturated violet ── */
+  --sidebar-text:        rgba(255,255,255,0.58);
   --sidebar-text-hover:  #FFFFFF;
-  --sidebar-text-muted:  rgba(255,255,255,0.35);
-  --sidebar-hover-bg:    rgba(255,255,255,0.08);
-  --sidebar-border:      rgba(255,255,255,0.08);
+  --sidebar-text-muted:  rgba(255,255,255,0.32);
+  --sidebar-hover-bg:    rgba(255,255,255,0.06);
+  --sidebar-border:      rgba(255,255,255,0.06);
 
   /* ── Borders ── */
-  --border:        #E9E4FB;
-  --border-accent: rgba(139,92,246,0.35);
-  --border-hover:  rgba(139,92,246,0.50);
-  --border-card:   #EDE9FE;
+  --border:        #EFEBFD;
+  --border-accent: rgba(139,128,216,0.30);
+  --border-hover:  rgba(139,128,216,0.42);
+  --border-card:   #F3F1FD;
 
   /* ── Typography ── */
-  --text-primary:    #1E0A3C;
-  --text-secondary:  #5B4280;
-  --text-muted:      #9E8CC0;
-  --text-accent:     #7C3AED;
+  --text-primary:    #2A244E;   /* muted, desaturated deep aubergine */
+  --text-secondary:  #675E8C;   /* soft lavender-gray */
+  --text-muted:      #A59EB9;   /* pale lavender-slate */
+  --text-accent:     #8B80D8;   /* desaturated wisteria pastel purple */
+  --text-on-dark:    #FFFFFF;
 
-  /* ── Brand accent (violet) ── */
-  --green:         #7C3AED;
-  --green-dark:    #6D28D9;
-  --green-bright:  #A78BFA;
-  --green-glow:    rgba(124, 58, 237, 0.10);
-  --green-glow-2:  rgba(124, 58, 237, 0.05);
+  /* ── Brand Violet Accent ── */
+  --green:         #8B80D8;
+  --green-dark:    #766AB8;
+  --green-bright:  #B5ACEE;
+  --green-glow:    rgba(139,128,216,0.10);
+  --green-glow-2:  rgba(139,128,216,0.05);
 
-  /* ── Brand Palette ── */
-  --seawind-deep:   #3B0764;
-  --seawind-sea:    #7C3AED;
-  --seawind-sky:    #8B5CF6;
-  --seawind-wind:   #C4B5FD;
-  --seawind-foam:   #F5F3FF;
-  --seawind-glow:   rgba(124,58,237,0.14);
+  /* ── Full Palette ── */
+  --seawind-deep:   #3C326E;
+  --seawind-sea:    #8B80D8;
+  --seawind-sky:    #9C92E4;
+  --seawind-wind:   #C2BCF2;
+  --seawind-foam:   #F8F7FF;
+  --seawind-glow:   rgba(139,128,216,0.10);
 
   /* ── Gradients ── */
-  --gradient-primary:      linear-gradient(135deg, #5B21B6 0%, #7C3AED 45%, #A78BFA 100%);
-  --gradient-hero:         linear-gradient(135deg, #FAFAFE 0%, #EDE9FE 60%, #E0D9FB 100%);
-  --gradient-seawind:      linear-gradient(135deg, #3B0764 0%, #6D28D9 40%, #8B5CF6 75%, #C4B5FD 100%);
-  --gradient-sidebar:      linear-gradient(180deg, #1E1048 0%, #160C38 60%, #120930 100%);
-  --gradient-seawind-soft: linear-gradient(160deg, rgba(124,58,237,0.08) 0%, rgba(167,139,250,0.04) 100%);
-  --gradient-card-blue:    linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(139,92,246,0.02) 100%);
-  --gradient-warm:         linear-gradient(135deg, #FDE68A 0%, #FCA5A5 100%);
-  --gradient-teal:         linear-gradient(135deg, #2DD4BF 0%, #5EEAD4 100%);
-  --gradient-purple:       linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);
+  --gradient-primary:      linear-gradient(135deg, #766AB8 0%, #8B80D8 50%, #B5ACEE 100%);
+  --gradient-hero:         linear-gradient(135deg, #EBE9F9 0%, #F5F4FD 60%, #FAF9FE 100%);
+  --gradient-seawind:      linear-gradient(135deg, #3C326E 0%, #766AB8 45%, #8B80D8 75%, #C2BCF2 100%);
+  --gradient-sidebar:      linear-gradient(180deg, #1F1A3A 0%, #17132B 65%, #110E20 100%);
+  --gradient-seawind-soft: linear-gradient(160deg, rgba(139,128,216,0.06) 0%, rgba(181,172,238,0.03) 100%);
+  --gradient-card-blue:    linear-gradient(135deg, rgba(139,128,216,0.04) 0%, rgba(139,128,216,0.01) 100%);
+  --gradient-warm:         linear-gradient(135deg, #FFE4E6 0%, #FEE2E2 100%);
+  --gradient-teal:         linear-gradient(135deg, #99F6E4 0%, #CCFBF1 100%);
+  --gradient-purple:       linear-gradient(135deg, #8B80D8 0%, #9C92E4 100%);
 
   /* ── Supporting Accents ── */
   --purple:        #8B5CF6;
@@ -87,9 +88,9 @@
   --mint-light:     rgba(16, 185, 129, 0.08);
 
   /* ── Primary CTA violet ── */
-  --cta-violet:      #7C3AED;
-  --cta-violet-dark: #6D28D9;
-  --cta-violet-glow: rgba(124, 58, 237, 0.28);
+  --cta-violet:      #8B80D8;
+  --cta-violet-dark: #766AB8;
+  --cta-violet-glow: rgba(139, 128, 216, 0.20);
 
   /* ── Layout ── */
   --sidebar-width:         268px;
@@ -105,13 +106,13 @@
   --radius-full: 9999px;
 
   /* ── Shadows ── */
-  --shadow-sm:      0 1px 3px rgba(59,7,100,0.06), 0 2px 10px rgba(59,7,100,0.04);
-  --shadow-md:      0 4px 16px rgba(59,7,100,0.10), 0 1px 4px rgba(59,7,100,0.05);
-  --shadow-lg:      0 8px 40px rgba(59,7,100,0.14), 0 2px 8px rgba(59,7,100,0.07);
-  --shadow-sidebar: 4px 0 24px rgba(0,0,0,0.20), 1px 0 0 rgba(255,255,255,0.04);
-  --shadow-blue:    0 6px 28px rgba(124,58,237,0.28);
-  --shadow-card:    0 1px 3px rgba(59,7,100,0.06), 0 4px 16px rgba(59,7,100,0.08);
-  --shadow-hover:   0 8px 32px rgba(124,58,237,0.20), 0 2px 8px rgba(59,7,100,0.08);
+  --shadow-sm:      0 1px 3px rgba(42,36,78,0.04), 0 2px 10px rgba(42,36,78,0.03);
+  --shadow-md:      0 4px 16px rgba(42,36,78,0.06), 0 1px 4px rgba(42,36,78,0.03);
+  --shadow-lg:      0 8px 40px rgba(42,36,78,0.09), 0 2px 8px rgba(42,36,78,0.04);
+  --shadow-sidebar: 4px 0 24px rgba(0,0,0,0.15), 1px 0 0 rgba(255,255,255,0.03);
+  --shadow-blue:    0 6px 28px rgba(139,128,216,0.18);
+  --shadow-card:    0 1px 3px rgba(42,36,78,0.04), 0 4px 16px rgba(42,36,78,0.05);
+  --shadow-hover:   0 8px 32px rgba(139,128,216,0.12), 0 2px 8px rgba(42,36,78,0.04);
 
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.38s cubic-bezier(0.4, 0, 0.2, 1);
@@ -819,8 +820,8 @@ input, textarea, select { font-family: inherit; }
 
 /* ─── Welcome Banner ─────────────────────────────────────── */
 .welcome-banner {
-  background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 30%, #8B5CF6 65%, #A78BFA 100%);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: linear-gradient(135deg, #E6E3FA 0%, #ECE9FA 35%, #F3F1FD 70%, #F9F8FE 100%);
+  border: 1px solid rgba(139, 128, 216, 0.15);
   border-radius: var(--radius-2xl);
   padding: 36px 40px;
   display: flex;
@@ -829,13 +830,13 @@ input, textarea, select { font-family: inherit; }
   margin-bottom: 28px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 40px rgba(109,40,217,0.35), 0 2px 8px rgba(59,7,100,0.15);
+  box-shadow: 0 8px 32px rgba(139,128,216,0.08), 0 2px 8px rgba(42,36,78,0.03);
   transition: box-shadow var(--transition-slow), transform var(--transition);
 }
 
 .welcome-banner:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 48px rgba(109,40,217,0.40), 0 4px 12px rgba(59,7,100,0.18);
+  box-shadow: 0 12px 40px rgba(139,128,216,0.12), 0 4px 12px rgba(42,36,78,0.05);
 }
 
 .welcome-banner::before {
@@ -919,13 +920,13 @@ input, textarea, select { font-family: inherit; }
 .welcome-text h1 {
   font-size: 32px;
   font-weight: 800;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 8px;
   letter-spacing: -0.5px;
   background: none;
-  -webkit-text-fill-color: #FFFFFF;
+  -webkit-text-fill-color: var(--text-primary);
   background-clip: unset;
-  text-shadow: 0 2px 12px rgba(59,7,100,0.20);
+  text-shadow: none;
 }
 
 @keyframes gradient-shift {
@@ -942,7 +943,7 @@ input, textarea, select { font-family: inherit; }
 
 .welcome-text p {
   font-size: 14px;
-  color: rgba(255,255,255,0.75);
+  color: var(--text-secondary);
   font-weight: 450;
 }
 
@@ -957,14 +958,14 @@ input, textarea, select { font-family: inherit; }
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.22);
+  background: #ffffff;
+  border: 1px solid rgba(139,128,216,0.18);
   border-radius: var(--radius-full);
   padding: 8px 16px;
   font-size: 13px;
-  color: rgba(255,255,255,0.90);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 2px 10px rgba(59,7,100,0.10);
+  color: var(--text-secondary);
+  backdrop-filter: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .badge svg {
@@ -1435,7 +1436,7 @@ input, textarea, select { font-family: inherit; }
   cursor: pointer;
   transition: transform var(--duration-fast) var(--ease-spring),
               box-shadow var(--transition);
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.28);
+  box-shadow: 0 4px 14px rgba(139, 128, 216, 0.22);
   position: relative;
   overflow: hidden;
   letter-spacing: 0.01em;
@@ -1444,7 +1445,7 @@ input, textarea, select { font-family: inherit; }
 .btn-primary:hover {
   background: var(--cta-violet-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.32);
+  box-shadow: 0 8px 24px rgba(139, 128, 216, 0.30);
 }
 
 .btn-primary:active {
@@ -1474,24 +1475,24 @@ input, textarea, select { font-family: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--cta-violet);
   font-size: 13px;
   font-weight: 600;
   padding: 10px 20px;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(139, 128, 216, 0.25);
   cursor: pointer;
   transition: all var(--transition);
   letter-spacing: 0.01em;
 }
 
 .btn-secondary:hover {
-  background: #ffffff;
-  color: var(--cta-violet);
-  border-color: #ffffff;
+  background: rgba(139, 128, 216, 0.05);
+  color: var(--cta-violet-dark);
+  border-color: rgba(139, 128, 216, 0.40);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:active {
