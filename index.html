@@ -64,7 +64,16 @@
               <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
             </svg>
           </button>
-          <div class="header-avatar" id="user-avatar-btn" title="EE Administrator">EE</div>
+          <div class="user-profile-pill" id="user-avatar-btn" title="EE Administrator">
+            <div class="user-profile-avatar">EE</div>
+            <div class="user-profile-info">
+              <div class="user-profile-name">EE Admin</div>
+              <div class="user-profile-role">Administrator</div>
+            </div>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#94a3b8;flex-shrink:0;">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
         </div>
       </header>
 
@@ -98,101 +107,74 @@
         <!-- Stats Grid -->
         <div class="stats-grid reveal-stagger">
 
-          <div class="stat-card green animate-fadeInUp animate-delay-1">
-            <div class="stat-header">
-              <div class="stat-icon green">
-                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <rect x="5" y="2" width="14" height="20" rx="2"/>
-                  <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="stat-trend flat">
-                <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-                0%
-              </div>
+          <div class="stat-card animate-fadeInUp animate-delay-1">
+            <div class="stat-icon-wrap">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="5" y="2" width="14" height="20" rx="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3" stroke-linecap="round"/>
+              </svg>
             </div>
-            <svg class="wave-bg" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0; pointer-events:none;" viewBox="0 0 1440 320" preserveAspectRatio="none"><path class="wave-path wave-path-1" fill="#d4cff5" fill-opacity="0.45" d="M 0 180 C 180 120, 360 260, 540 180 C 720 120, 900 260, 1080 180 C 1260 120, 1440 260, 1620 180 C 1800 120, 1980 260, 2160 180 C 2340 120, 2520 260, 2700 180 C 2880 120, 3060 260, 3240 180 L 3240 320 L 0 320 Z"></path><path class="wave-path wave-path-2" fill="#c8c2f0" fill-opacity="0.35" d="M 0 210 C 180 260, 360 150, 540 210 C 720 260, 900 150, 1080 210 C 1260 260, 1440 150, 1620 210 C 1800 260, 1980 150, 2160 210 C 2340 260, 2520 150, 2700 210 C 2880 260, 3060 150, 3240 210 L 3240 320 L 0 320 Z"></path></svg>
-
             <div class="stat-value" data-counter="0" id="stat-devices">0</div>
             <div class="stat-label">Total Devices</div>
+            <div class="stat-divider"></div>
             <div class="stat-footer">
-              <span class="stat-footer-dot green"></span>
-              Active this month
+              <span class="stat-footer-badge">Active</span>
+              <button class="stat-footer-arrow">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+              </button>
             </div>
           </div>
 
-          <div class="stat-card purple animate-fadeInUp animate-delay-2">
-            <div class="stat-header">
-              <div class="stat-icon purple">
-                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <line x1="22" y1="2" x2="11" y2="13"/>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                </svg>
-              </div>
-              <div class="stat-trend up">
-                <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/>
-                </svg>
-                +12%
-              </div>
+          <div class="stat-card animate-fadeInUp animate-delay-2">
+            <div class="stat-icon-wrap">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
             </div>
-            <svg class="wave-bg" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0; pointer-events:none;" viewBox="0 0 1440 320" preserveAspectRatio="none"><path class="wave-path wave-path-1" fill="#d4cff5" fill-opacity="0.45" d="M 0 180 C 180 120, 360 260, 540 180 C 720 120, 900 260, 1080 180 C 1260 120, 1440 260, 1620 180 C 1800 120, 1980 260, 2160 180 C 2340 120, 2520 260, 2700 180 C 2880 120, 3060 260, 3240 180 L 3240 320 L 0 320 Z"></path><path class="wave-path wave-path-2" fill="#c8c2f0" fill-opacity="0.35" d="M 0 210 C 180 260, 360 150, 540 210 C 720 260, 900 150, 1080 210 C 1260 260, 1440 150, 1620 210 C 1800 260, 1980 150, 2160 210 C 2340 260, 2520 150, 2700 210 C 2880 260, 3060 150, 3240 210 L 3240 320 L 0 320 Z"></path></svg>
-
             <div class="stat-value" data-counter="4872" id="stat-messages">0</div>
             <div class="stat-label">Total Messages</div>
+            <div class="stat-divider"></div>
             <div class="stat-footer">
-              <span class="stat-footer-dot purple"></span>
-              Sent this month
+              <span class="stat-footer-badge">Sent</span>
+              <button class="stat-footer-arrow">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+              </button>
             </div>
           </div>
 
-          <div class="stat-card amber animate-fadeInUp animate-delay-3">
-            <div class="stat-header">
-              <div class="stat-icon amber">
-                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-              </div>
-              <div class="stat-trend flat">
-                <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-                0
-              </div>
+          <div class="stat-card animate-fadeInUp animate-delay-3">
+            <div class="stat-icon-wrap">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
             </div>
-            <svg class="wave-bg" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0; pointer-events:none;" viewBox="0 0 1440 320" preserveAspectRatio="none"><path class="wave-path wave-path-1" fill="#d4cff5" fill-opacity="0.45" d="M 0 180 C 180 120, 360 260, 540 180 C 720 120, 900 260, 1080 180 C 1260 120, 1440 260, 1620 180 C 1800 120, 1980 260, 2160 180 C 2340 120, 2520 260, 2700 180 C 2880 120, 3060 260, 3240 180 L 3240 320 L 0 320 Z"></path><path class="wave-path wave-path-2" fill="#c8c2f0" fill-opacity="0.35" d="M 0 210 C 180 260, 360 150, 540 210 C 720 260, 900 150, 1080 210 C 1260 260, 1440 150, 1620 210 C 1800 260, 1980 150, 2160 210 C 2340 260, 2520 150, 2700 210 C 2880 260, 3060 150, 3240 210 L 3240 320 L 0 320 Z"></path></svg>
-
             <div class="stat-value" data-counter="24" id="stat-pending">0</div>
             <div class="stat-label">Pending Messages</div>
+            <div class="stat-divider"></div>
             <div class="stat-footer">
-              <span class="stat-footer-dot amber"></span>
-              In queue
+              <span class="stat-footer-badge">In Queue</span>
+              <button class="stat-footer-arrow">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
             </div>
           </div>
 
-          <div class="stat-card blue animate-fadeInUp animate-delay-4">
-            <div class="stat-header">
-              <div class="stat-icon blue">
-                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                </svg>
-              </div>
-              <div class="stat-trend up">
-                <svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/>
-                </svg>
-              </div>
+          <div class="stat-card animate-fadeInUp animate-delay-4">
+            <div class="stat-icon-wrap">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+              </svg>
             </div>
-            <svg class="wave-bg" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0; pointer-events:none;" viewBox="0 0 1440 320" preserveAspectRatio="none"><path class="wave-path wave-path-1" fill="#d4cff5" fill-opacity="0.45" d="M 0 180 C 180 120, 360 260, 540 180 C 720 120, 900 260, 1080 180 C 1260 120, 1440 260, 1620 180 C 1800 120, 1980 260, 2160 180 C 2340 120, 2520 260, 2700 180 C 2880 120, 3060 260, 3240 180 L 3240 320 L 0 320 Z"></path><path class="wave-path wave-path-2" fill="#c8c2f0" fill-opacity="0.35" d="M 0 210 C 180 260, 360 150, 540 210 C 720 260, 900 150, 1080 210 C 1260 260, 1440 150, 1620 210 C 1800 260, 1980 150, 2160 210 C 2340 260, 2520 150, 2700 210 C 2880 260, 3060 150, 3240 210 L 3240 320 L 0 320 Z"></path></svg>
-
             <div class="stat-value" data-counter="156" id="stat-incoming">0</div>
             <div class="stat-label">Incoming Messages</div>
+            <div class="stat-divider"></div>
             <div class="stat-footer">
-              <span class="stat-footer-dot blue"></span>
-              +12 today
+              <span class="stat-footer-badge">+12 today</span>
+              <button class="stat-footer-arrow">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+              </button>
             </div>
           </div>
 
@@ -226,24 +208,31 @@
             <div class="analytics-metrics">
               <div class="metric-item">
                 <div class="metric-label">
-                  <span class="metric-dot" style="background:#2563EB"></span>
-                  Sent
+                  <span class="metric-dot" style="background:#1d4ed8"></span>SENT
                 </div>
                 <div class="metric-value" data-counter="4872">0</div>
+                <div class="metric-bar" style="background:#1d4ed8;"></div>
               </div>
               <div class="metric-item">
                 <div class="metric-label">
-                  <span class="metric-dot" style="background:#10B981"></span>
-                  Delivered
+                  <span class="metric-dot" style="background:#60a5fa"></span>DELIVERED
                 </div>
                 <div class="metric-value" data-counter="4654">0</div>
+                <div class="metric-bar" style="background:#60a5fa;"></div>
               </div>
               <div class="metric-item">
                 <div class="metric-label">
-                  <span class="metric-dot" style="background:#F59E0B"></span>
-                  Read
+                  <span class="metric-dot" style="background:#94a3b8"></span>READ
                 </div>
                 <div class="metric-value" data-counter="3218">0</div>
+                <div class="metric-bar" style="background:#94a3b8;"></div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">
+                  <span class="metric-dot" style="background:#e2e8f0"></span>FAILED
+                </div>
+                <div class="metric-value" data-counter="218">0</div>
+                <div class="metric-bar" style="background:#e2e8f0;"></div>
               </div>
             </div>
 
@@ -270,48 +259,49 @@
 
             <div class="quick-actions-grid">
               <a href="pages/send-message.html" class="quick-action-card" id="qa-send">
-                <div class="qa-icon green">
+                <div class="qa-icon">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
                   </svg>
                 </div>
-                <div class="qa-title">Send Message</div>
-                <div class="qa-desc">Compose &amp; send</div>
+                <div class="qa-text">
+                  <div class="qa-title">Send Message</div>
+                  <div class="qa-desc">Compose &amp; send</div>
+                </div>
               </a>
-
               <a href="pages/auto-reply.html" class="quick-action-card" id="qa-auto-reply">
-                <div class="qa-icon purple">
+                <div class="qa-icon">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                   </svg>
                 </div>
-                <div class="qa-title">Auto Reply</div>
-                <div class="qa-desc">Manage rules</div>
+                <div class="qa-text">
+                  <div class="qa-title">Auto Reply</div>
+                  <div class="qa-desc">Manage rules</div>
+                </div>
               </a>
-
               <a href="pages/message-response.html" class="quick-action-card" id="qa-responses">
-                <div class="qa-icon blue">
+                <div class="qa-icon">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <polyline points="9 11 12 14 22 4"/>
                     <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                   </svg>
                 </div>
-                <div class="qa-title">View Responses</div>
-                <div class="qa-desc">Incoming replies</div>
+                <div class="qa-text">
+                  <div class="qa-title">View Responses</div>
+                  <div class="qa-desc">Incoming report</div>
+                </div>
               </a>
-
               <a href="pages/message-reports.html" class="quick-action-card" id="qa-reports">
-                <div class="qa-icon amber">
+                <div class="qa-icon">
                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <line x1="18" y1="20" x2="18" y2="10"/>
-                    <line x1="12" y1="20" x2="12" y2="4"/>
-                    <line x1="6" y1="20" x2="6" y2="14"/>
+                    <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
                   </svg>
                 </div>
-                <div class="qa-title">Manage Report</div>
-                <div class="qa-desc">Analytics &amp; logs</div>
+                <div class="qa-text">
+                  <div class="qa-title">Manage Report</div>
+                  <div class="qa-desc">Analytics &amp; logs</div>
+                </div>
               </a>
             </div>
 
