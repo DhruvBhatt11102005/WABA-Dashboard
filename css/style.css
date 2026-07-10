@@ -747,9 +747,9 @@ input, textarea, select { font-family: inherit; }
 }
 
 .welcome-banner {
-  background: #004094;  /* solid deep royal blue */
+  background: linear-gradient(135deg, #1a2b6b 0%, #1e3a8a 50%, #1d4ed8 100%);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 28px 36px;
   display: flex;
   align-items: center;
@@ -757,7 +757,7 @@ input, textarea, select { font-family: inherit; }
   margin-bottom: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0,64,148,0.18);
+  box-shadow: 0 4px 20px rgba(29,78,216,0.25);
   transition: box-shadow var(--transition);
 }
 
@@ -777,21 +777,21 @@ input, textarea, select { font-family: inherit; }
 .welcome-text { position: relative; z-index: 1; }
 
 .welcome-text h1 {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
-  color: #0f172a;
+  color: #ffffff;
   margin-bottom: 8px;
   letter-spacing: -0.5px;
   background: none;
   -webkit-background-clip: unset;
-  -webkit-text-fill-color: #0f172a;
+  -webkit-text-fill-color: #ffffff;
   background-clip: unset;
   animation: none;
 }
 
 .welcome-text p {
   font-size: 14px;
-  color: rgba(255,255,255,0.85);  /* clean readable white text */
+  color: rgba(255,255,255,0.85);
   font-weight: 400;
 }
 
@@ -819,13 +819,13 @@ input, textarea, select { font-family: inherit; }
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #1D5BB5;  /* solid high-contrast dark blue */
-  border: none;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.20);
   border-radius: var(--radius-full);
   padding: 8px 16px;
   font-size: 13px;
-  color: rgba(255,255,255,0.95);  /* clean white */
-  box-shadow: none;
+  color: #ffffff;
+  backdrop-filter: blur(8px);
 }
 
 .badge svg {
@@ -834,7 +834,7 @@ input, textarea, select { font-family: inherit; }
 }
 
 .badge-time {
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
@@ -875,11 +875,17 @@ input, textarea, select { font-family: inherit; }
 .stat-card.blue   { --accent-from: var(--blue); --accent-to: var(--blue-light); --accent-glow: rgba(59,130,246,0.12); }
 
 .stat-card::before {
-  display: none !important;
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-from, #2563eb), var(--accent-to, #93c5fd));
+  opacity: 0.9;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
-.stat-card::after {
-  display: none;
+/* Hide inline wave SVGs inside stat cards — reference uses flat white cards */
+.stat-card .wave-bg { display: none; }
   content: '';
   position: absolute;
   bottom: 0;
@@ -947,7 +953,7 @@ input, textarea, select { font-family: inherit; }
   z-index: 1;
   font-size: 40px;
   font-weight: 800;
-  color: #1E0A3C;
+  color: #0f172a;
   line-height: 1;
   margin-bottom: 8px;
   font-variant-numeric: tabular-nums;
