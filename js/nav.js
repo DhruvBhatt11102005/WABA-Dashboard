@@ -10,17 +10,13 @@
     </svg>
   </button>
 
-  <div class="sidebar-logo">
-    <div class="logo-icon seawind-logo" aria-hidden="true">
-      <svg class="seawind-logo-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path class="wind-line wind-line-1" d="M3 9c2.5 0 2.5-3 5-3s2.5 3 5 3"/>
-        <path class="wind-line wind-line-2" d="M2 13c3 0 3-3 6-3s3 3 6 3"/>
-        <path class="wind-line wind-line-3" d="M4 17c2 0 2-2 4-2s2 2 4 2"/>
-      </svg>
+  <div class="sidebar-logo" style="flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 24px 16px;">
+    <div style="background: #ffffff; border-radius: 8px; padding: 8px; width: 100%; max-width: 140px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.1);">
+      <img src="${PAGES_PREFIX}images/logo.png" alt="SeaWind" style="max-width: 100%; height: auto; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <span style="display: none; font-size: 16px; font-weight: 800; color: #0F2747; font-family: 'Outfit', sans-serif;">SeaWind</span>
     </div>
-    <div class="logo-text">
-      <h2>WABA Panel</h2>
-      <span>Seawind Solutions</span>
+    <div class="logo-text" style="text-align: center; margin-top: 4px;">
+      <h2 style="font-size: 13px; font-weight: 600; color: #FFFFFF; letter-spacing: 0.02em;">SeaWind Solution Pvt Ltd</h2>
     </div>
   </div>
 

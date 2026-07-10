@@ -239,14 +239,12 @@ input, textarea, select { font-family: inherit; }
   width: var(--sidebar-collapsed);
 }
 
-/* Sidebar Logo */
 .sidebar-logo {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 20px 18px;
   border-bottom: 1px solid var(--sidebar-border);
-  min-height: var(--header-height);
   flex-shrink: 0;
   position: relative;
   z-index: 1;
@@ -762,22 +760,22 @@ input, textarea, select { font-family: inherit; }
 }
 
 .welcome-banner {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-xl);
-  padding: 24px 28px;
+  background: #004094;  /* solid deep royal blue */
+  border: none;
+  border-radius: 12px;
+  padding: 28px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 24px;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-card);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(0,64,148,0.18);
+  transition: box-shadow var(--transition);
 }
 
 .welcome-banner:hover {
-  border-color: var(--border-accent);
+  box-shadow: 0 6px 20px rgba(0,64,148,0.24);
 }
 
 /* Remove decorative graphics, animations, and gradients */
@@ -792,16 +790,16 @@ input, textarea, select { font-family: inherit; }
 .welcome-text { position: relative; z-index: 1; }
 
 .welcome-text h1 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
+  color: #FFFFFF;  /* white text */
+  margin-bottom: 6px;
   letter-spacing: -0.3px;
 }
 
 .welcome-text p {
-  font-size: 13.5px;
-  color: var(--text-secondary);
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);  /* clean readable white text */
   font-weight: 400;
 }
 
@@ -829,22 +827,22 @@ input, textarea, select { font-family: inherit; }
   display: flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
+  background: #1D5BB5;  /* solid high-contrast dark blue */
+  border: none;
   border-radius: var(--radius-full);
   padding: 8px 16px;
   font-size: 13px;
-  color: var(--text-secondary);
-  box-shadow: var(--shadow-sm);
+  color: rgba(255,255,255,0.95);  /* clean white */
+  box-shadow: none;
 }
 
 .badge svg {
-  color: var(--text-accent);
+  color: rgba(255,255,255,0.80);
   flex-shrink: 0;
 }
 
 .badge-time {
-  color: var(--text-primary);
+  color: #FFFFFF;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
@@ -885,12 +883,7 @@ input, textarea, select { font-family: inherit; }
 .stat-card.blue   { --accent-from: var(--blue); --accent-to: var(--blue-light); --accent-glow: rgba(59,130,246,0.12); }
 
 .stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-from), var(--accent-to, transparent));
-  opacity: 0.85;
+  display: none !important;
 }
 
 .stat-card::after {
