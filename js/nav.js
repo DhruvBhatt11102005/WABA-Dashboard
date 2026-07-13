@@ -10,13 +10,12 @@
     </svg>
   </button>
 
-  <div class="sidebar-logo" style="flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 24px 16px;">
-    <div style="background: #ffffff; border-radius: 8px; padding: 8px; width: 100%; max-width: 140px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.1);">
-      <img src="${PAGES_PREFIX}images/logo.png" alt="SeaWind" style="max-width: 100%; height: auto; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-      <span style="display: none; font-size: 16px; font-weight: 800; color: #0F2747; font-family: 'Outfit', sans-serif;">SeaWind</span>
+  <div class="sidebar-logo">
+    <div class="brand-mark">
+      <img src="${PAGES_PREFIX}images/logo/trademark-logo-new.png" alt="SeaWind" />
     </div>
-    <div class="logo-text" style="text-align: center; margin-top: 4px;">
-      <h2 style="font-size: 13px; font-weight: 600; color: #FFFFFF; letter-spacing: 0.02em;">SeaWind Solution Pvt Ltd</h2>
+    <div class="logo-text">
+      <h2>SeaWind Solution Pvt Ltd</h2>
     </div>
   </div>
 
@@ -171,10 +170,24 @@
     });
   }
 
+  function enhanceHeaders() {
+    document.querySelectorAll('.header').forEach(header => {
+      const left = header.querySelector('.header-left');
+      if (!left || left.querySelector('.header-page-title')) return;
+      const crumb = left.querySelector('.breadcrumb-current');
+      if (!crumb) return;
+      const title = document.createElement('div');
+      title.className = 'header-page-title';
+      title.textContent = crumb.textContent;
+      left.insertBefore(title, left.querySelector('.breadcrumb'));
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', renderSidebar);
+    document.addEventListener('DOMContentLoaded', () => { renderSidebar(); enhanceHeaders(); });
   } else {
     renderSidebar();
+    enhanceHeaders();
   }
 
   /* Load UI enhancements on all pages */
